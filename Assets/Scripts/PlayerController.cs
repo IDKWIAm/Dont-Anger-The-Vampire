@@ -7,10 +7,18 @@ public class PlayerController : MonoBehaviour
     public float maxFallingSpeed = 10f;
     public float weaponShowTime = 0.1f;
     public bool faceRight;
-
-    public bool fastFalling;
+    [Space]
+    public bool doubleJumpAbility;
+    [Space]
+    public bool dashAbility;
+    public float pressingInterval = 0.25f;
+    public float dashTime = 1.5f;
+    public float dashStrength = 8f;
+    public float dashCooldown = 1f;
+    [Space]
+    public bool fastFallingAbility;
     public float fastFallingMultiplier = 3f;
-
+    [Space]
     public Transform groundChecker;
     public GameObject weapon;
     public GameObject playerForm;
@@ -20,6 +28,13 @@ public class PlayerController : MonoBehaviour
     private bool _isMovingX;
     private bool _isMovingY;
     private bool _isFlying;
+    private bool _doubleJumpPerformed;
+    private bool _dashPerformed;
+    private bool _dashRight;
+    private bool _dashLeft;
+    private bool _dPressed;
+    private bool _aPressed;
+    private float _timer;
 
     private Rigidbody2D _playerRigidbody;
 
@@ -30,7 +45,9 @@ public class PlayerController : MonoBehaviour
 
     void Update()
     {
+        TimerUpdate();
         MoveUpdate();
+        DashUpdate();
         JumpUpdate();
         ChangeFormUpdate();
         AttackUpdate();
@@ -39,6 +56,19 @@ public class PlayerController : MonoBehaviour
     private bool IsGrounded()
     {
         return Physics2D.OverlapCircle(groundChecker.position, 0.2f, groundLayer);
+    }
+
+    private void TimerUpdate()
+    {
+        if (_aPressed || _dPressed)
+        {
+            _timer -= Time.deltaTime;
+            if (_timer <= 0)
+            {
+                _aPressed = false;
+                _dPressed = false;
+            }
+        }
     }
 
     private void MoveUpdate()
@@ -91,7 +121,7 @@ public class PlayerController : MonoBehaviour
             }
         }
 
-        if (!_isMovingX)
+        if (!_isMovingX && !_dashRight && !_dashLeft)
         {
             _playerRigidbody.velocity = new Vector2(0, _playerRigidbody.velocity.y);
         }
@@ -103,13 +133,23 @@ public class PlayerController : MonoBehaviour
 
         _playerRigidbody.gravityScale = 1;
 
-        if (Input.GetKey(KeyCode.S) && fastFalling)
+        if (IsGrounded()) _doubleJumpPerformed = false;
+
+        if (Input.GetKey(KeyCode.S) && fastFallingAbility)
         {
             _playerRigidbody.gravityScale = fastFallingMultiplier;
         }
-        if (Input.GetKeyDown(KeyCode.Space) && IsGrounded())
+        if (Input.GetKeyDown(KeyCode.Space))
         {
-            _playerRigidbody.velocity = new Vector2(_playerRigidbody.velocity.x, jumpForce);
+            if (IsGrounded())
+            {
+                _playerRigidbody.velocity = new Vector2(_playerRigidbody.velocity.x, jumpForce);
+            } 
+            else if (doubleJumpAbility && !_doubleJumpPerformed)
+            {
+                _playerRigidbody.velocity = new Vector2(_playerRigidbody.velocity.x, jumpForce);
+                _doubleJumpPerformed = true;
+            }
         }
 
         if (_playerRigidbody.velocity.y < -maxFallingSpeed)
@@ -151,6 +191,78 @@ public class PlayerController : MonoBehaviour
             playerForm.SetActive(true);
             _playerRigidbody.gravityScale = 1;
             _isFlying = false;
+            _doubleJumpPerformed = true;
         }
+    }
+
+    private void DashUpdate()
+    {
+        if (_isFlying) return;
+
+        if (_dashRight)
+        {
+            _playerRigidbody.velocity = new Vector2(dashStrength, _playerRigidbody.velocity.y);
+        } 
+        else if (_dashLeft)
+        {
+            _playerRigidbody.velocity = new Vector2(-dashStrength, _playerRigidbody.velocity.y);
+        }
+
+        if (!dashAbility) return;
+
+        if (IsGrounded()) _dashPerformed = false;
+
+        if (Input.GetKeyDown(KeyCode.A))
+        {
+            if (_aPressed && IsGrounded() || _aPressed && !_dashPerformed)
+            {
+                _aPressed = false;
+                _dashPerformed = true;
+                _timer = 0;
+                _dashLeft = true;
+                dashAbility = false;
+                Invoke("DisableDashLeft", dashTime);
+                Invoke("ActivateDash", dashTime + dashCooldown);
+            }
+            else
+            {
+                _aPressed = true;
+                _timer = pressingInterval;
+            }
+        }
+
+        if (Input.GetKeyDown(KeyCode.D))
+        {
+            if (_dPressed && IsGrounded() || _dPressed && !_dashPerformed)
+            {
+                _dPressed = false;
+                _dashPerformed = true;
+                _timer = 0;
+                _dashRight = true;
+                dashAbility = false;
+                Invoke("DisableDashRight", dashTime);
+                Invoke("ActivateDash", dashTime + dashCooldown);
+            }
+            else
+            {
+                _dPressed = true;
+                _timer = pressingInterval;
+            }
+        }
+    }
+
+    private void DisableDashRight()
+    {
+        _dashRight = false;
+    }
+
+    private void DisableDashLeft()
+    {
+        _dashLeft = false;
+    }
+
+    private void ActivateDash()
+    {
+        dashAbility = true;
     }
 }
