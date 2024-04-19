@@ -1,8 +1,9 @@
 ﻿using UnityEngine;
 
-public class EnemyHealth : MonoBehaviour
+public class BossHealth : MonoBehaviour
 {
     [SerializeField] private float health = 100f;
+    [SerializeField] private GameObject[] bossWalls;
 
     public void DealDamage(float damage)
     {
@@ -10,6 +11,11 @@ public class EnemyHealth : MonoBehaviour
 
         if (health <= 0)
         {
+            for (int i = 0; i < bossWalls.Length; i++)
+            {
+                bossWalls[i].SetActive(false);
+            }
+
             Destroy(gameObject);
         }
     }

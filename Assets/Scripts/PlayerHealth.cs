@@ -3,7 +3,7 @@ using UnityEngine.SceneManagement;
 
 public class PlayerHealth : MonoBehaviour
 {
-    public float health = 100f;
+    [SerializeField] private float health = 100f;
 
     public void DealDamage(float damage)
     {

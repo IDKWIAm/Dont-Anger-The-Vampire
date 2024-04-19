@@ -2,28 +2,29 @@
 
 public class PlayerController : MonoBehaviour
 {
-    public float speed = 4f;
-    public float jumpForce = 7f;
-    public float maxFallingSpeed = 10f;
-    public float weaponShowTime = 0.1f;
-    public bool faceRight;
+    [SerializeField] private float speed = 4f;
+    [SerializeField] private float jumpForce = 7f;
+    [SerializeField] private float maxFallingSpeed = 10f;
+    [SerializeField] private float weaponShowTime = 0.1f;
+    [SerializeField] private bool faceRight;
     [Space]
-    public bool doubleJumpAbility;
+    [SerializeField] private bool doubleJumpAbility;
     [Space]
-    public bool dashAbility;
-    public float pressingInterval = 0.25f;
-    public float dashTime = 1.5f;
-    public float dashStrength = 8f;
-    public float dashCooldown = 1f;
+    [SerializeField] private bool dashAbility;
+    [SerializeField] private float pressingInterval = 0.25f;
+    [SerializeField] private float dashTime = 1.5f;
+    [SerializeField] private float dashStrength = 8f;
+    [SerializeField] private float dashCooldown = 1f;
     [Space]
-    public bool fastFallingAbility;
-    public float fastFallingMultiplier = 3f;
+    [SerializeField] private bool fastFallingAbility;
+    [SerializeField] private float fastFallingMultiplier = 3f;
     [Space]
-    public Transform groundChecker;
-    public GameObject weapon;
-    public GameObject playerForm;
-    public GameObject batForm;
-    public LayerMask groundLayer;
+    [SerializeField] private Transform groundChecker;
+    [SerializeField] private GameObject weapon;
+    [SerializeField] private GameObject playerForm;
+    [SerializeField] private GameObject batForm;
+    [SerializeField] private LayerMask groundLayer;
+    [SerializeField] private DialogueManager dialogueManager;
 
     private bool _isMovingX;
     private bool _isMovingY;
@@ -161,6 +162,7 @@ public class PlayerController : MonoBehaviour
     private void AttackUpdate()
     {
         if (_isFlying) return;
+        if (dialogueManager.IsRunning()) return;
 
         if (Input.GetMouseButtonDown(0))
         {

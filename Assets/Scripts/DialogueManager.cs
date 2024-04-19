@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class DialogueManager : MonoBehaviour
 {
-    public TextMeshProUGUI messageText;
+    [SerializeField] private TextMeshProUGUI messageText;
 
     private bool _textAppeared;
     private bool _isRunning;
@@ -17,10 +17,7 @@ public class DialogueManager : MonoBehaviour
         {
             if (_textAppeared == true)
             {
-                _skip = false;
-                _textAppeared = false;
-                _isRunning = false;
-                gameObject.SetActive(false);
+                CloseWindow();
             }
             else
             {
@@ -60,8 +57,20 @@ public class DialogueManager : MonoBehaviour
 
     public void DisplayMessage(string message, float letterAppearingDelay)
     {
-        gameObject.SetActive(true);
         StartCoroutine(GradualTextAppearing(message, letterAppearingDelay));
+    }
+
+    public void OpenWindow()
+    {
+        gameObject.SetActive(true);
+    }
+
+    public void CloseWindow()
+    {
+        _skip = false;
+        _textAppeared = false;
+        _isRunning = false;
+        gameObject.SetActive(false);
     }
 
     public bool IsRunning()

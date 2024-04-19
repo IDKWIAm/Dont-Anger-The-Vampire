@@ -2,29 +2,33 @@
 
 public class EnemyAI : MonoBehaviour
 {
-    public float speed = 4f;
-    public float jumpForce = 8f;
-    public float jumpDistance = 1f;
-    public float damage = 5f;
-    public float attackRange = 0.5f;
-    public Transform player;
-    public Transform groundChecker;
-    public LayerMask groundLayer;
+    [SerializeField] private float speed = 4f;
+    [SerializeField] private float jumpForce = 8f;
+    [SerializeField] private float jumpDistance = 1f;
+    [SerializeField] private float damage = 5f;
+    [SerializeField] private Transform player;
+    [SerializeField] private Transform groundChecker;
+    [SerializeField] private LayerMask groundLayer;
 
     private Rigidbody2D _rigitbody;
-    private PlayerHealth _playerHealth;
 
     private void Start()
     {
         _rigitbody = GetComponent<Rigidbody2D>();
-        _playerHealth = player.GetComponent<PlayerHealth>();
     }
 
     private void Update()
     {
         MoveUpdate();
         JumpUpdate();
-        AttackUpdate();
+    }
+
+    private void OnTriggerStay2D(Collider2D collision)
+    {
+        if (collision.TryGetComponent<PlayerHealth>(out PlayerHealth _playerHealth))
+        {
+            _playerHealth.DealDamage(damage * Time.fixedDeltaTime);
+        }
     }
 
     private bool IsGrounded()
@@ -50,14 +54,6 @@ public class EnemyAI : MonoBehaviour
         if (IsGrounded() && player.position.y > transform.position.y && Mathf.Abs(player.position.x - transform.position.x) < jumpDistance && Mathf.Abs(player.position.y - transform.position.y) > transform.localScale.y / 2)
         {
             _rigitbody.velocity = new Vector2(_rigitbody.velocity.x, jumpForce);
-        }
-    }
-
-    private void AttackUpdate()
-    {
-        if (Mathf.Abs(player.position.x - transform.position.x) < attackRange && Mathf.Abs(player.position.y - transform.position.y) < transform.localScale.y / 2)
-        {
-            _playerHealth.DealDamage(damage * Time.deltaTime);
         }
     }
 }
