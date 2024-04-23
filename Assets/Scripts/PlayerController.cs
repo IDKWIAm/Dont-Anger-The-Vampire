@@ -163,6 +163,7 @@ public class PlayerController : MonoBehaviour
     {
         if (_isFlying) return;
         if (dialogueManager.IsRunning()) return;
+        if (Time.timeScale == 0) return;
 
         if (Input.GetMouseButtonDown(0))
         {
