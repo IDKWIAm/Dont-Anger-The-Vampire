@@ -3,24 +3,33 @@ using UnityEngine.SceneManagement;
 
 public class MenuManager : MonoBehaviour
 {
-    [SerializeField] private GameObject mainMenu;
-    [SerializeField] private GameObject settingsMenu;
+    [SerializeField] private float speed = 10;
+    [Space]
+    [SerializeField] private Transform mainMenu;
+    [SerializeField] private Transform settingsMenu;
+    [SerializeField] private Transform paintings;
+
+    private Transform _target;
 
     private void Start()
     {
         Time.timeScale = 1;
+        _target = settingsMenu;
+    }
+
+    private void Update()
+    {
+        paintings.position = Vector3.Lerp(paintings.position, _target.position, Mathf.Clamp(Time.deltaTime * speed, 0, 1));
     }
 
     public void OpenMainMenu()
     {
-        mainMenu.SetActive(true);
-        settingsMenu.SetActive(false);
+        _target = settingsMenu;
     }
 
     public void OpenSettings()
     {
-        settingsMenu.SetActive(true);
-        mainMenu.SetActive(false);
+        _target = mainMenu;
     }
 
     public void LoadGame()

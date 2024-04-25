@@ -2,7 +2,6 @@
 
 public class Boss : MonoBehaviour
 {
-    [SerializeField] private float damage;
     [SerializeField] private float attacksDelay = 5f;
 
     [SerializeField] private GameObject boulder;
@@ -50,14 +49,6 @@ public class Boss : MonoBehaviour
         _firstAttackPositions = GameObject.FindGameObjectsWithTag("First Attack Position");
         _secondAttackPositions = GameObject.FindGameObjectsWithTag("Second Attack Position");
         _thirdAttackPositions = GameObject.FindGameObjectsWithTag("Third Attack Position");
-    }
-
-    private void OnTriggerStay2D(Collider2D collision)
-    {
-        if (collision.TryGetComponent<PlayerHealth>(out PlayerHealth _playerHealth))
-        {
-            _playerHealth.DealDamage(damage * Time.fixedDeltaTime);
-        }
     }
 
     private void FirstAttack()

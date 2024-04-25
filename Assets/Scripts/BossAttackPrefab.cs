@@ -2,7 +2,6 @@
 
 public class BossAttackPrefab : MonoBehaviour
 {
-    [SerializeField] private float contactDamage = 20f;
     [SerializeField] private float attackDelay = 1f;
     [SerializeField] private float selfDestroyTimer = 5f;
 
@@ -14,14 +13,6 @@ public class BossAttackPrefab : MonoBehaviour
         warning.SetActive(true);
         Invoke("Attack", attackDelay);
         Invoke("SelfDestroy", selfDestroyTimer);
-    }
-
-    private void OnTriggerEnter2D(Collider2D collision)
-    {
-        if (collision.TryGetComponent<PlayerHealth>(out PlayerHealth playerHealth))
-        {
-            playerHealth.DealDamage(contactDamage);
-        }
     }
 
     private void Attack()

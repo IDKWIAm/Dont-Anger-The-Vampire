@@ -5,10 +5,11 @@ public class EnemyAI : MonoBehaviour
     [SerializeField] private float speed = 4f;
     [SerializeField] private float jumpForce = 8f;
     [SerializeField] private float jumpDistance = 1f;
-    [SerializeField] private float damage = 5f;
     [SerializeField] private Transform player;
     [SerializeField] private Transform groundChecker;
     [SerializeField] private LayerMask groundLayer;
+
+    private bool _knockFromRight;
 
     private Rigidbody2D _rigitbody;
 
@@ -21,14 +22,6 @@ public class EnemyAI : MonoBehaviour
     {
         MoveUpdate();
         JumpUpdate();
-    }
-
-    private void OnTriggerStay2D(Collider2D collision)
-    {
-        if (collision.TryGetComponent<PlayerHealth>(out PlayerHealth _playerHealth))
-        {
-            _playerHealth.DealDamage(damage * Time.fixedDeltaTime);
-        }
     }
 
     private bool IsGrounded()

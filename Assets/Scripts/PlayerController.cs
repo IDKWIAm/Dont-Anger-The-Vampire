@@ -2,23 +2,29 @@
 
 public class PlayerController : MonoBehaviour
 {
+    [Header("Player")]
     [SerializeField] private float speed = 4f;
     [SerializeField] private float jumpForce = 7f;
     [SerializeField] private float maxFallingSpeed = 10f;
     [SerializeField] private float weaponShowTime = 0.1f;
     [SerializeField] private bool faceRight;
-    [Space]
-    [SerializeField] private bool doubleJumpAbility;
-    [Space]
-    [SerializeField] private bool dashAbility;
+
+    [Header("Double Jump")]
+    [SerializeField] private bool doubleJumpEnabled;
+
+    [Header("Dash")]
+    [SerializeField] private bool dashEnabled;
     [SerializeField] private float pressingInterval = 0.25f;
     [SerializeField] private float dashTime = 1.5f;
     [SerializeField] private float dashStrength = 8f;
     [SerializeField] private float dashCooldown = 1f;
-    [Space]
-    [SerializeField] private bool fastFallingAbility;
+
+    [Header("Fast Falling")]
+    [SerializeField] private bool fastFallingEnabled;
     [SerializeField] private float fastFallingMultiplier = 3f;
+
     [Space]
+
     [SerializeField] private Transform groundChecker;
     [SerializeField] private GameObject weapon;
     [SerializeField] private GameObject playerForm;
@@ -36,12 +42,15 @@ public class PlayerController : MonoBehaviour
     private bool _dPressed;
     private bool _aPressed;
     private float _timer;
+    private float _KBCounter;
+    private float _defaultGravity;
 
     private Rigidbody2D _playerRigidbody;
 
     private void Start()
     {
         _playerRigidbody = GetComponent<Rigidbody2D>();
+        _defaultGravity = _playerRigidbody.gravityScale;
     }
 
     void Update()
@@ -75,6 +84,12 @@ public class PlayerController : MonoBehaviour
     private void MoveUpdate()
     {
         _isMovingX = false;
+
+        if (_KBCounter >= 0)
+        {
+            _KBCounter -= Time.deltaTime;
+            return;
+        }
 
         if (Input.GetKey(KeyCode.A))
         {
@@ -132,13 +147,13 @@ public class PlayerController : MonoBehaviour
     {
         if (_isFlying) return;
 
-        _playerRigidbody.gravityScale = 1;
+        _playerRigidbody.gravityScale = _defaultGravity;
 
         if (IsGrounded()) _doubleJumpPerformed = false;
 
-        if (Input.GetKey(KeyCode.S) && fastFallingAbility)
+        if (Input.GetKey(KeyCode.S) && fastFallingEnabled)
         {
-            _playerRigidbody.gravityScale = fastFallingMultiplier;
+            _playerRigidbody.gravityScale *= fastFallingMultiplier;
         }
         if (Input.GetKeyDown(KeyCode.Space))
         {
@@ -146,7 +161,7 @@ public class PlayerController : MonoBehaviour
             {
                 _playerRigidbody.velocity = new Vector2(_playerRigidbody.velocity.x, jumpForce);
             } 
-            else if (doubleJumpAbility && !_doubleJumpPerformed)
+            else if (doubleJumpEnabled && !_doubleJumpPerformed)
             {
                 _playerRigidbody.velocity = new Vector2(_playerRigidbody.velocity.x, jumpForce);
                 _doubleJumpPerformed = true;
@@ -211,7 +226,7 @@ public class PlayerController : MonoBehaviour
             _playerRigidbody.velocity = new Vector2(-dashStrength, _playerRigidbody.velocity.y);
         }
 
-        if (!dashAbility) return;
+        if (!dashEnabled) return;
 
         if (IsGrounded()) _dashPerformed = false;
 
@@ -223,7 +238,7 @@ public class PlayerController : MonoBehaviour
                 _dashPerformed = true;
                 _timer = 0;
                 _dashLeft = true;
-                dashAbility = false;
+                dashEnabled = false;
                 Invoke("DisableDashLeft", dashTime);
                 Invoke("ActivateDash", dashTime + dashCooldown);
             }
@@ -242,7 +257,7 @@ public class PlayerController : MonoBehaviour
                 _dashPerformed = true;
                 _timer = 0;
                 _dashRight = true;
-                dashAbility = false;
+                dashEnabled = false;
                 Invoke("DisableDashRight", dashTime);
                 Invoke("ActivateDash", dashTime + dashCooldown);
             }
@@ -266,6 +281,14 @@ public class PlayerController : MonoBehaviour
 
     private void ActivateDash()
     {
-        dashAbility = true;
+        dashEnabled = true;
+    }
+
+    public void Knock(float KBForce, float KBTime, bool knockFromRight)
+    {
+        _KBCounter = KBTime;
+        
+        if (knockFromRight) _playerRigidbody.velocity = new Vector2(-KBForce, KBForce);
+        else _playerRigidbody.velocity = new Vector2(KBForce, KBForce);
     }
 }

@@ -2239,18 +2239,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2a5dc19a3212e7f44937c5e69e17d7e0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 5
-  jumpForce: 8
+  speed: 6
+  jumpForce: 12
   maxFallingSpeed: 10
   weaponShowTime: 0.06
   faceRight: 1
-  doubleJumpAbility: 0
-  dashAbility: 0
+  doubleJumpEnabled: 1
+  dashEnabled: 1
   pressingInterval: 0.25
   dashTime: 0.25
   dashStrength: 25
   dashCooldown: 0.25
-  fastFallingAbility: 0
+  fastFallingEnabled: 1
   fastFallingMultiplier: 5
   groundChecker: {fileID: 9195161542617583313}
   weapon: {fileID: 9195161541473035062}
@@ -2313,7 +2313,7 @@ Rigidbody2D:
   m_Mass: 1
   m_LinearDrag: 0
   m_AngularDrag: 0.05
-  m_GravityScale: 1
+  m_GravityScale: 3
   m_Material: {fileID: 6200000, guid: a9f6cf321bb77d9459a920f425dc7a85, type: 2}
   m_Interpolate: 1
   m_SleepingMode: 0

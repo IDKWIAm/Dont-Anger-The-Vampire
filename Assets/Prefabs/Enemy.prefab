@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 1780019024584775715}
   - component: {fileID: 1780019024584775742}
   - component: {fileID: 1780019024584775743}
+  - component: {fileID: 8426754616199402455}
   - component: {fileID: 1780019024584775712}
   - component: {fileID: 1780019024584775713}
   - component: {fileID: 1780019024584775714}
@@ -48,11 +49,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ae5f54ed68e5b5b44a8216b58a167737, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 3
+  speed: 4
   jumpForce: 8
   jumpDistance: 2
-  damage: 10
-  attackRange: 2
   player: {fileID: 0}
   groundChecker: {fileID: 1780019025743765053}
   groundLayer:
@@ -71,6 +70,21 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   health: 100
+--- !u!114 &8426754616199402455
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1780019024584775716}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 84b615314f5f945428b5b56a054d29cf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  contactDamage: 20
+  KBForce: 10
+  KBTime: 0.5
 --- !u!212 &1780019024584775712
 SpriteRenderer:
   m_ObjectHideFlags: 0

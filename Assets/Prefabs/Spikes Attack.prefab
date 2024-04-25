@@ -127,7 +127,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 672065f09e4f653448acfc25073d287d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  contactDamage: 25
   attackDelay: 0.75
   selfDestroyTimer: 3
   warning: {fileID: 425687484037403814}
@@ -191,6 +190,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2689449889865656771}
+  - component: {fileID: 2189749254837011983}
   - component: {fileID: 6150425350135525852}
   - component: {fileID: 2707644035328889709}
   m_Layer: 0
@@ -214,6 +214,21 @@ Transform:
   m_Father: {fileID: 5079706591637420978}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2189749254837011983
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6811501175254404111}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 84b615314f5f945428b5b56a054d29cf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  contactDamage: 20
+  KBForce: 10
+  KBTime: 0.5
 --- !u!212 &6150425350135525852
 SpriteRenderer:
   m_ObjectHideFlags: 0
