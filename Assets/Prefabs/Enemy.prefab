@@ -82,7 +82,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 84b615314f5f945428b5b56a054d29cf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  contactDamage: 20
+  contactDamage: 1
   KBForce: 10
   KBTime: 0.5
 --- !u!212 &1780019024584775712

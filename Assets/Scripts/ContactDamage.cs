@@ -2,7 +2,7 @@
 
 public class ContactDamage : MonoBehaviour
 {
-    [SerializeField] private float contactDamage = 20f;
+    [SerializeField] private int contactDamage = 1;
     [SerializeField] private float KBForce = 10f;
     [SerializeField] private float KBTime = 0.5f;
 
