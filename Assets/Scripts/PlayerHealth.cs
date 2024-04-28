@@ -5,20 +5,25 @@ using UnityEngine.UI;
 
 public class PlayerHealth : MonoBehaviour
 {
-    [SerializeField] private int maxHealth = 5;
     [SerializeField] private int health = 5;
+    [SerializeField] private int startMaxHealth = 5;
+    [SerializeField] private int maxHealth = 12;
+    [SerializeField] private int heartsInRow = 6;
+    
     [SerializeField] private Image heartPoint;
     [SerializeField] private Transform parentCanvas;
     [SerializeField] private RectTransform heartsStartPos;
 
     private List<GameObject> hearts = new List<GameObject>();
 
-    private int drawedHearts;
+    private int drawedHeartsInRow;
+    private int currentRow;
+
 
     private void Start()
     {
-        health = maxHealth;
-        for (int i = 0; i < maxHealth; i++)
+        health = startMaxHealth;
+        for (int i = 0; i < startMaxHealth; i++)
         {
             CreateHeart();
         }
@@ -28,9 +33,15 @@ public class PlayerHealth : MonoBehaviour
     private void CreateHeart()
     {
         Image heart = Instantiate(heartPoint, parentCanvas);
-        heart.rectTransform.localPosition = new Vector2(heartsStartPos.localPosition.x + heartPoint.rectTransform.rect.width * 2 * drawedHearts, heartsStartPos.localPosition.y);
+        if (startMaxHealth <= heartsInRow) heart.rectTransform.localPosition = new Vector2(heartsStartPos.localPosition.x + heartPoint.rectTransform.rect.width * 2 * drawedHeartsInRow, heartsStartPos.localPosition.y);
+        else heart.rectTransform.localPosition = new Vector2(heartsStartPos.localPosition.x + heartPoint.rectTransform.rect.width * 2 * drawedHeartsInRow, heartsStartPos.localPosition.y - heartPoint.rectTransform.rect.height * 2 * currentRow);
         hearts.Add(heart.gameObject);
-        drawedHearts += 1;
+        drawedHeartsInRow += 1;
+        if (drawedHeartsInRow == heartsInRow)
+        {
+            drawedHeartsInRow -= heartsInRow;
+            currentRow++;
+        }
     }
 
     private void CheckHealth()
@@ -50,9 +61,19 @@ public class PlayerHealth : MonoBehaviour
 
     public void HealthUp()
     {
-        maxHealth += 1;
+        if (startMaxHealth < maxHealth)
+        {
+            startMaxHealth += 1;
+            CreateHeart();
+        }
+        Heal();
+    }
+
+    public void Heal()
+    {
+        if (health == startMaxHealth) return;
+
         health += 1;
-        CreateHeart();
         CheckHealth();
     }
 

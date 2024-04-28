@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 1780019024584775712}
   - component: {fileID: 1780019024584775713}
   - component: {fileID: 1780019024584775714}
-  m_Layer: 9
+  m_Layer: 10
   m_Name: Enemy
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -34,6 +34,8 @@ Transform:
   m_LocalScale: {x: 1, y: 2, z: 1}
   m_Children:
   - {fileID: 1780019025743765053}
+  - {fileID: 4560169758543649792}
+  - {fileID: 3765548558813829298}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -49,14 +51,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ae5f54ed68e5b5b44a8216b58a167737, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 4
-  jumpForce: 8
-  jumpDistance: 2
+  speed: 5
+  jumpForce: 12
+  jumpDistance: 3
   player: {fileID: 0}
   groundChecker: {fileID: 1780019025743765053}
   groundLayer:
     serializedVersion: 2
     m_Bits: 256
+  wallChecker: {fileID: 4560169758543649792}
+  wallLayer:
+    serializedVersion: 2
+    m_Bits: 768
+  abyssChecker: {fileID: 3765548558813829298}
 --- !u!114 &1780019024584775743
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -69,7 +76,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: db56a78e56f9e384bb32723ca62bfee1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  health: 100
+  health: 5
 --- !u!114 &8426754616199402455
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -176,7 +183,7 @@ Rigidbody2D:
   m_Mass: 1
   m_LinearDrag: 0
   m_AngularDrag: 0.05
-  m_GravityScale: 1
+  m_GravityScale: 3
   m_Material: {fileID: 6200000, guid: a9f6cf321bb77d9459a920f425dc7a85, type: 2}
   m_Interpolate: 1
   m_SleepingMode: 0
@@ -211,4 +218,64 @@ Transform:
   m_Children: []
   m_Father: {fileID: 1780019024584775715}
   m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &6911703475242484239
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4560169758543649792}
+  m_Layer: 0
+  m_Name: Wall Checker
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4560169758543649792
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6911703475242484239}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0.507, y: -0.195, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1780019024584775715}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &7067326818758971947
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 3765548558813829298}
+  m_Layer: 0
+  m_Name: Abyss Checker
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &3765548558813829298
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7067326818758971947}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0.688, y: -0.564, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1780019024584775715}
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}

@@ -11,5 +11,6 @@ public class BossTrigger : MonoBehaviour
         bossHealthbar.SetActive(true);
         boss.SetActive(true);
         if (bossWall != null) bossWall.SetActive(true);
+        Destroy(gameObject);
     }
 }

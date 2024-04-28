@@ -7,7 +7,6 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private float jumpForce = 7f;
     [SerializeField] private float maxFallingSpeed = 10f;
     [SerializeField] private float weaponShowTime = 0.1f;
-    [SerializeField] private bool faceRight;
 
     [Header("Double Jump")]
     [SerializeField] private bool doubleJumpEnabled;
@@ -32,6 +31,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private LayerMask groundLayer;
     [SerializeField] private DialogueManager dialogueManager;
 
+    private bool _faceRight = true;
     private bool _isMovingX;
     private bool _isMovingY;
     private bool _isFlying;
@@ -95,24 +95,20 @@ public class PlayerController : MonoBehaviour
         {
             _playerRigidbody.velocity = new Vector2(-speed, _playerRigidbody.velocity.y);
             _isMovingX = true;
-            if (faceRight)
+            if (_faceRight)
             {
-                var scale = transform.localScale;
-                scale.x *= -1;
-                transform.localScale = scale;
-                faceRight = false;
+                MirrorCharacter();
+                _faceRight = false;
             }
         }
         if (Input.GetKey(KeyCode.D))
         {
             _playerRigidbody.velocity = new Vector2(speed, _playerRigidbody.velocity.y);
             _isMovingX = true;
-            if (!faceRight)
+            if (!_faceRight)
             {
-                var scale = transform.localScale;
-                scale.x *= -1;
-                transform.localScale = scale;
-                faceRight = true;
+                MirrorCharacter();
+                _faceRight = true;
             }
         }
 
@@ -141,6 +137,13 @@ public class PlayerController : MonoBehaviour
         {
             _playerRigidbody.velocity = new Vector2(0, _playerRigidbody.velocity.y);
         }
+    }
+
+    private void MirrorCharacter()
+    {
+        var scale = transform.localScale;
+        scale.x *= -1;
+        transform.localScale = scale;
     }
 
     private void JumpUpdate()

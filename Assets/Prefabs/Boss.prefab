@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 8608665656289642692}
   - component: {fileID: 8608665656289642693}
   - component: {fileID: 8608665656289642694}
-  m_Layer: 9
+  m_Layer: 10
   m_Name: Boss
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -65,7 +65,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 49975c00296d4d6468e33e716e80005d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  health: 250
+  health: 20
   bossHealthbar: {fileID: 0}
   bossWalls: []
 --- !u!114 &448905378745725454

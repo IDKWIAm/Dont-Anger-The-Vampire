@@ -2318,7 +2318,6 @@ MonoBehaviour:
   jumpForce: 12
   maxFallingSpeed: 10
   weaponShowTime: 0.06
-  faceRight: 1
   doubleJumpEnabled: 1
   dashEnabled: 1
   pressingInterval: 0.25
@@ -2347,8 +2346,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 444046f16487ac04cbff054268f9245f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealth: 5
-  health: 5
+  health: 3
+  startMaxHealth: 5
+  maxHealth: 12
+  heartsInRow: 6
   heartPoint: {fileID: 206508153533568270, guid: 5eadbf4c502fec149a05ab3be2101257,
     type: 3}
   parentCanvas: {fileID: 3415296997106962986}
@@ -2470,7 +2471,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fcbe765039f85f74298f0b9f3b340026, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damage: 15
+  damage: 1
 --- !u!212 &9195161541473035048
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -2558,7 +2559,7 @@ GameObject:
   - component: {fileID: 9195161541961848160}
   - component: {fileID: 9195161541961848163}
   - component: {fileID: 9195161541961848162}
-  m_Layer: 9
+  m_Layer: 10
   m_Name: Bat Form
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2654,7 +2655,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 9195161542617583313}
-  m_Layer: 9
+  m_Layer: 0
   m_Name: Ground Checker
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2686,7 +2687,7 @@ GameObject:
   - component: {fileID: 9195161542639313306}
   - component: {fileID: 9195161542639313311}
   - component: {fileID: 9195161542639313309}
-  m_Layer: 9
+  m_Layer: 10
   m_Name: Player Form
   m_TagString: Untagged
   m_Icon: {fileID: 0}
