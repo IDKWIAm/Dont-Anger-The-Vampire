@@ -14,6 +14,7 @@ public class MenuManager : MonoBehaviour
     private void Start()
     {
         Time.timeScale = 1;
+        PlayerPrefs.DeleteAll();
         _target = settingsMenu;
     }
 

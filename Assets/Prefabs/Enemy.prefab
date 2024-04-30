@@ -53,7 +53,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 5
   jumpForce: 12
-  jumpDistance: 3
+  jumpDistance: 4
+  KBResistacnce: 25
   player: {fileID: 0}
   groundChecker: {fileID: 1780019025743765053}
   groundLayer:
@@ -76,7 +77,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: db56a78e56f9e384bb32723ca62bfee1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  health: 5
+  health: 7
 --- !u!114 &8426754616199402455
 MonoBehaviour:
   m_ObjectHideFlags: 0

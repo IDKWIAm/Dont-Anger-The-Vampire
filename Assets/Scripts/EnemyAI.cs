@@ -5,6 +5,7 @@ public class EnemyAI : MonoBehaviour
     [SerializeField] private float speed = 4f;
     [SerializeField] private float jumpForce = 8f;
     [SerializeField] private float jumpDistance = 1f;
+    [SerializeField] private float KBResistacnce = 30f; //In percents
     [SerializeField] private Transform player;
     [SerializeField] private Transform groundChecker;
     [SerializeField] private LayerMask groundLayer;
@@ -13,12 +14,15 @@ public class EnemyAI : MonoBehaviour
     [SerializeField] private Transform abyssChecker;
 
     private bool _faceRight = true;
+    private float _KBCounter;
 
     private Rigidbody2D _rigitbody;
 
     private void Start()
     {
         _rigitbody = GetComponent<Rigidbody2D>();
+
+        KBResistacnce = 1f - Mathf.Clamp(KBResistacnce / 100, 0, 1);
     }
 
     private void Update()
@@ -39,7 +43,7 @@ public class EnemyAI : MonoBehaviour
 
     private bool IsAbyss()
     {
-        return !Physics2D.OverlapArea(abyssChecker.position, abyssChecker.position - new Vector3(0.2f, 1.5f, 0));
+        return !Physics2D.OverlapArea(abyssChecker.position, abyssChecker.position - new Vector3(0.2f, 1.5f, 0)) && !NeedToFall();
     }
 
     private bool IsPlayerAbove()
@@ -47,9 +51,20 @@ public class EnemyAI : MonoBehaviour
         return player.position.y > transform.position.y && Mathf.Abs(player.position.x - transform.position.x) < jumpDistance && Mathf.Abs(player.position.y - transform.position.y) > transform.localScale.y / 2;
     }
 
+    private bool NeedToFall()
+    {
+        return player.position.y < transform.position.y && Mathf.Abs(player.position.x - transform.position.x) < Mathf.Abs(player.position.y - transform.position.y);
+    }
+
 
     private void MoveUpdate()
     {
+        if (_KBCounter > 0)
+        {
+            _KBCounter -= Time.deltaTime;
+            return;
+        }
+
         if (player.position.x < transform.position.x)
         {
             _rigitbody.velocity = new Vector2(-speed, _rigitbody.velocity.y);
@@ -86,5 +101,13 @@ public class EnemyAI : MonoBehaviour
                 _rigitbody.velocity = new Vector2(_rigitbody.velocity.x, jumpForce);
             }
         }
+    }
+
+    public void Knock(float KBForce, float KBTime, bool knockFromRight)
+    {
+        _KBCounter = KBTime * KBResistacnce;
+
+        if (knockFromRight) _rigitbody.velocity = new Vector2(-KBForce, KBForce) * KBResistacnce;
+        else _rigitbody.velocity = new Vector2(KBForce, KBForce) * KBResistacnce;
     }
 }

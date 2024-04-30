@@ -11,6 +11,8 @@ public class DoorTrigger : MonoBehaviour
     {
         _animator = transform.parent.GetComponent<Animator>();
         _collider = transform.parent.GetComponent<BoxCollider2D>();
+
+        if (falseWall != null) PlayerPrefs.SetInt("SecretsAmount", PlayerPrefs.GetInt("SecretsAmount") + 1);
     }
 
     private void OnTriggerStay2D(Collider2D collision)
@@ -18,12 +20,13 @@ public class DoorTrigger : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.E))
         {
             _animator.SetTrigger("Triggered");
-            _collider.enabled = false;
-
+            
             if (falseWall != null)
             {
                 falseWall.GetComponent<Animator>().SetTrigger("Triggered");
+                if (_collider.enabled == true) PlayerPrefs.SetInt("secretsFound", PlayerPrefs.GetInt("secretsFound") + 1);
             }
+            _collider.enabled = false;
         }
     }
 }

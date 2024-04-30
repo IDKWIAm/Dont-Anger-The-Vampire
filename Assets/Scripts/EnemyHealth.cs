@@ -10,6 +10,7 @@ public class EnemyHealth : MonoBehaviour
 
         if (health <= 0)
         {
+            PlayerPrefs.SetInt("collectorsPunished", PlayerPrefs.GetInt("collectorsPunished") + 1);
             Destroy(gameObject);
         }
     }

@@ -2347,7 +2347,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   health: 3
-  startMaxHealth: 5
+  startMaxHealth: 3
   maxHealth: 12
   heartsInRow: 6
   heartPoint: {fileID: 206508153533568270, guid: 5eadbf4c502fec149a05ab3be2101257,
@@ -2472,6 +2472,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   damage: 1
+  KBForce: 10
+  KBTime: 0.6
 --- !u!212 &9195161541473035048
 SpriteRenderer:
   m_ObjectHideFlags: 0

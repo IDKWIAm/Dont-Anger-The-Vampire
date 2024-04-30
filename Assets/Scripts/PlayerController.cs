@@ -85,7 +85,7 @@ public class PlayerController : MonoBehaviour
     {
         _isMovingX = false;
 
-        if (_KBCounter >= 0)
+        if (_KBCounter > 0)
         {
             _KBCounter -= Time.deltaTime;
             return;
