@@ -54,7 +54,8 @@ MonoBehaviour:
   speed: 5
   jumpForce: 12
   jumpDistance: 4
-  KBResistacnce: 25
+  visionRange: 25
+  KBResistacnce: 40
   player: {fileID: 0}
   groundChecker: {fileID: 1780019025743765053}
   groundLayer:

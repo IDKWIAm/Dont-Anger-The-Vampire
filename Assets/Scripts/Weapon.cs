@@ -14,7 +14,7 @@ public class Weapon : MonoBehaviour
         {
             enemyHealth.DealDamage(damage);
 
-            if (enemyHealth.gameObject.transform.position.x < transform.position.x - transform.localScale.x / 2) _knockFromRight = true;
+            if (enemyHealth.gameObject.transform.position.x < transform.parent.position.x) _knockFromRight = true;
             else _knockFromRight = false;
             enemyHealth.gameObject.GetComponent<EnemyAI>().Knock(KBForce, KBTime, _knockFromRight);
         }

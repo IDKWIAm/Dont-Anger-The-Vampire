@@ -5,6 +5,7 @@ public class EnemyAI : MonoBehaviour
     [SerializeField] private float speed = 4f;
     [SerializeField] private float jumpForce = 8f;
     [SerializeField] private float jumpDistance = 1f;
+    [SerializeField] private float visionRange = 20f;
     [SerializeField] private float KBResistacnce = 30f; //In percents
     [SerializeField] private Transform player;
     [SerializeField] private Transform groundChecker;
@@ -59,6 +60,8 @@ public class EnemyAI : MonoBehaviour
 
     private void MoveUpdate()
     {
+        if (Vector3.Distance(transform.position, player.position) > visionRange) return;
+
         if (_KBCounter > 0)
         {
             _KBCounter -= Time.deltaTime;
@@ -94,6 +97,8 @@ public class EnemyAI : MonoBehaviour
 
     private void JumpUpdate()
     {
+        if (Vector3.Distance(transform.position, player.position) > visionRange) return;
+
         if (IsGrounded())
         {
             if (IsAbyss() || IsObstructed() || IsPlayerAbove())

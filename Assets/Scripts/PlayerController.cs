@@ -5,6 +5,7 @@ public class PlayerController : MonoBehaviour
     [Header("Player")]
     [SerializeField] private float speed = 4f;
     [SerializeField] private float jumpForce = 7f;
+    [SerializeField] private float kojotTime = 0.2f;
     [SerializeField] private float maxFallingSpeed = 10f;
     [SerializeField] private float weaponShowTime = 0.1f;
 
@@ -32,17 +33,23 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private DialogueManager dialogueManager;
 
     private bool _faceRight = true;
+
     private bool _isMovingX;
     private bool _isMovingY;
     private bool _isFlying;
+
     private bool _doubleJumpPerformed;
+
     private bool _dashPerformed;
     private bool _dashRight;
     private bool _dashLeft;
     private bool _dPressed;
     private bool _aPressed;
+
     private float _timer;
     private float _KBCounter;
+    private float _kojotCounter;
+
     private float _defaultGravity;
 
     private Rigidbody2D _playerRigidbody;
@@ -68,6 +75,12 @@ public class PlayerController : MonoBehaviour
         return Physics2D.OverlapCircle(groundChecker.position, 0.2f, groundLayer);
     }
 
+    private bool CojotJumpEnable()
+    {
+        return _kojotCounter > 0;
+    }
+    
+
     private void TimerUpdate()
     {
         if (_aPressed || _dPressed)
@@ -79,6 +92,8 @@ public class PlayerController : MonoBehaviour
                 _dPressed = false;
             }
         }
+
+        if (_kojotCounter > 0) _kojotCounter -= Time.deltaTime;
     }
 
     private void MoveUpdate()
@@ -152,7 +167,11 @@ public class PlayerController : MonoBehaviour
 
         _playerRigidbody.gravityScale = _defaultGravity;
 
-        if (IsGrounded()) _doubleJumpPerformed = false;
+        if (IsGrounded())
+        {
+            _kojotCounter = kojotTime;
+            _doubleJumpPerformed = false;
+        }
 
         if (Input.GetKey(KeyCode.S) && fastFallingEnabled)
         {
@@ -160,7 +179,7 @@ public class PlayerController : MonoBehaviour
         }
         if (Input.GetKeyDown(KeyCode.Space))
         {
-            if (IsGrounded())
+            if (IsGrounded() || CojotJumpEnable())
             {
                 _playerRigidbody.velocity = new Vector2(_playerRigidbody.velocity.x, jumpForce);
             } 
@@ -231,44 +250,44 @@ public class PlayerController : MonoBehaviour
 
         if (!dashEnabled) return;
 
-        if (IsGrounded()) _dashPerformed = false;
+        if (IsGrounded() || CojotJumpEnable()) _dashPerformed = false;
 
         if (Input.GetKeyDown(KeyCode.A))
         {
-            if (_aPressed && IsGrounded() || _aPressed && !_dashPerformed)
+            if (_aPressed)
             {
-                _aPressed = false;
-                _dashPerformed = true;
-                _timer = 0;
-                _dashLeft = true;
-                dashEnabled = false;
-                Invoke("DisableDashLeft", dashTime);
-                Invoke("ActivateDash", dashTime + dashCooldown);
+                if (IsGrounded() || CojotJumpEnable() || !_dashPerformed)
+                {
+                    _aPressed = false;
+                    _dashPerformed = true;
+                    _timer = 0;
+                    _dashLeft = true;
+                    dashEnabled = false;
+                    Invoke("DisableDashLeft", dashTime);
+                    Invoke("ActivateDash", dashTime + dashCooldown);
+                }
             }
-            else
-            {
-                _aPressed = true;
-                _timer = pressingInterval;
-            }
+            _aPressed = true;
+            _timer = pressingInterval;
         }
 
         if (Input.GetKeyDown(KeyCode.D))
         {
-            if (_dPressed && IsGrounded() || _dPressed && !_dashPerformed)
+            if (_dPressed)
             {
-                _dPressed = false;
-                _dashPerformed = true;
-                _timer = 0;
-                _dashRight = true;
-                dashEnabled = false;
-                Invoke("DisableDashRight", dashTime);
-                Invoke("ActivateDash", dashTime + dashCooldown);
+                if (IsGrounded() || CojotJumpEnable() || !_dashPerformed)
+                {
+                    _dPressed = false;
+                    _dashPerformed = true;
+                    _timer = 0;
+                    _dashRight = true;
+                    dashEnabled = false;
+                    Invoke("DisableDashRight", dashTime);
+                    Invoke("ActivateDash", dashTime + dashCooldown);
+                }
             }
-            else
-            {
-                _dPressed = true;
-                _timer = pressingInterval;
-            }
+            _dPressed = true;
+            _timer = pressingInterval;
         }
     }
 

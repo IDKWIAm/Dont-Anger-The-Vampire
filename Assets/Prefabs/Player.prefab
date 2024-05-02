@@ -2316,6 +2316,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 6
   jumpForce: 12
+  kojotTime: 0.1
   maxFallingSpeed: 10
   weaponShowTime: 0.06
   doubleJumpEnabled: 1
@@ -2346,8 +2347,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 444046f16487ac04cbff054268f9245f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  health: 3
-  startMaxHealth: 3
+  health: 4
+  startMaxHealth: 4
   maxHealth: 12
   heartsInRow: 6
   heartPoint: {fileID: 206508153533568270, guid: 5eadbf4c502fec149a05ab3be2101257,
