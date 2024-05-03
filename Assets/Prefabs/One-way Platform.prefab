@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 7490194265817307623}
   - component: {fileID: 1708987374346408676}
   - component: {fileID: 3060228997031374399}
+  - component: {fileID: 5858121682602455448}
   m_Layer: 8
   m_Name: One-way Platform
   m_TagString: Untagged
@@ -117,10 +118,10 @@ PlatformEffector2D:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1801822342513584165}
   m_Enabled: 1
-  m_UseColliderMask: 1
+  m_UseColliderMask: 0
   m_ColliderMask:
     serializedVersion: 2
-    m_Bits: 4294967295
+    m_Bits: 1847
   m_RotationalOffset: 0
   m_UseOneWay: 1
   m_UseOneWayGrouping: 0
@@ -128,3 +129,15 @@ PlatformEffector2D:
   m_UseSideFriction: 0
   m_UseSideBounce: 0
   m_SideArc: 1
+--- !u!114 &5858121682602455448
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1801822342513584165}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 93deec73864df414cba2d8fe134707d3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

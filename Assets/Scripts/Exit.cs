@@ -5,6 +5,6 @@ public class Exit : MonoBehaviour
 {
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        SceneManager.LoadScene(2);
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
     }
 }

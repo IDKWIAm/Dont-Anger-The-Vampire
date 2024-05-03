@@ -16,6 +16,7 @@ public class Boss : MonoBehaviour
 
     private void Start()
     {
+        ApplyDifficulty();
         InitAttackPositions();
         _timer = attacksDelay;
     }
@@ -42,6 +43,16 @@ public class Boss : MonoBehaviour
             }
             _timer = attacksDelay;
         }
+    }
+
+    private void ApplyDifficulty()
+    {
+        float difficultyMultiplyer = PlayerPrefs.GetFloat("DifficultyMultiplyer");
+        if (difficultyMultiplyer == 0) difficultyMultiplyer = 1;
+        if (difficultyMultiplyer == 0.75f) difficultyMultiplyer = 1.25f;
+        if (difficultyMultiplyer == 1.25f) difficultyMultiplyer = 0.75f;
+
+        attacksDelay *= difficultyMultiplyer;
     }
 
     private void InitAttackPositions()

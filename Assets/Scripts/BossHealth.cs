@@ -10,8 +10,18 @@ public class BossHealth : MonoBehaviour
 
     private void Start()
     {
+        ApplyDifficulty();
         _maxHealth = health;
     }
+
+    private void ApplyDifficulty()
+    {
+        float difficultyMultiplyer = PlayerPrefs.GetFloat("DifficultyMultiplyer");
+        if (difficultyMultiplyer == 0) difficultyMultiplyer = 1;
+
+        health *= difficultyMultiplyer;
+    }
+
 
     public void DealDamage(float damage)
     {

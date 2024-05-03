@@ -23,6 +23,8 @@ public class EnemyAI : MonoBehaviour
     {
         _rigitbody = GetComponent<Rigidbody2D>();
 
+        ApplyDifficulty();
+
         KBResistacnce = 1f - Mathf.Clamp(KBResistacnce / 100, 0, 1);
     }
 
@@ -30,6 +32,15 @@ public class EnemyAI : MonoBehaviour
     {
         MoveUpdate();
         JumpUpdate();
+    }
+
+    private void ApplyDifficulty()
+    {
+        float difficultyMultiplyer = PlayerPrefs.GetFloat("DifficultyMultiplyer");
+        if (difficultyMultiplyer == 0) difficultyMultiplyer = 1;
+
+        speed *= difficultyMultiplyer;
+        KBResistacnce *= difficultyMultiplyer;
     }
 
     private bool IsGrounded()

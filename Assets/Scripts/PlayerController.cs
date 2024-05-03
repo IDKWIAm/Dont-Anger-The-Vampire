@@ -3,8 +3,10 @@
 public class PlayerController : MonoBehaviour
 {
     [Header("Player")]
-    [SerializeField] private float speed = 4f;
+    [SerializeField] private float speed = 5f;
     [SerializeField] private float jumpForce = 7f;
+    [SerializeField] private float flySpeed = 8f;
+    [SerializeField] private float flyingTime = 3f;
     [SerializeField] private float kojotTime = 0.2f;
     [SerializeField] private float maxFallingSpeed = 10f;
     [SerializeField] private float weaponShowTime = 0.1f;
@@ -32,6 +34,8 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private LayerMask groundLayer;
     [SerializeField] private DialogueManager dialogueManager;
 
+    private float _baseSpeed;
+
     private bool _faceRight = true;
 
     private bool _isMovingX;
@@ -39,8 +43,9 @@ public class PlayerController : MonoBehaviour
     private bool _isFlying;
 
     private bool _doubleJumpPerformed;
-
     private bool _dashPerformed;
+    private bool _flyAbilityPerformed;
+
     private bool _dashRight;
     private bool _dashLeft;
     private bool _dPressed;
@@ -49,15 +54,19 @@ public class PlayerController : MonoBehaviour
     private float _timer;
     private float _KBCounter;
     private float _kojotCounter;
+    private float _flyingTimer;
 
     private float _defaultGravity;
 
     private Rigidbody2D _playerRigidbody;
+    private Transform _flyBarValue;
 
     private void Start()
     {
         _playerRigidbody = GetComponent<Rigidbody2D>();
         _defaultGravity = _playerRigidbody.gravityScale;
+        _baseSpeed = speed;
+        _flyBarValue = batForm.transform.GetChild(0);
     }
 
     void Update()
@@ -94,6 +103,7 @@ public class PlayerController : MonoBehaviour
         }
 
         if (_kojotCounter > 0) _kojotCounter -= Time.deltaTime;
+        if (_flyingTimer > 0) _flyingTimer -= Time.deltaTime;
     }
 
     private void MoveUpdate()
@@ -129,6 +139,7 @@ public class PlayerController : MonoBehaviour
 
         if (_isFlying)
         {
+            _flyBarValue.localScale = new Vector2(_flyingTimer / flyingTime, _flyBarValue.localScale.y);
             _isMovingY = false;
 
             if (Input.GetKey(KeyCode.W))
@@ -177,6 +188,7 @@ public class PlayerController : MonoBehaviour
         {
             _playerRigidbody.gravityScale *= fastFallingMultiplier;
         }
+
         if (Input.GetKeyDown(KeyCode.Space))
         {
             if (IsGrounded() || CojotJumpEnable())
@@ -216,20 +228,26 @@ public class PlayerController : MonoBehaviour
 
     private void ChangeFormUpdate()
     {
-        if (Input.GetKeyDown(KeyCode.LeftShift))
+        if (IsGrounded()) _flyAbilityPerformed = false;
+
+        if (Input.GetKeyDown(KeyCode.LeftShift) && !_flyAbilityPerformed)
         {
+            _flyingTimer = flyingTime;
             weapon.SetActive(false);
             batForm.SetActive(true);
             playerForm.SetActive(false);
             _playerRigidbody.gravityScale = 0;
+            speed = flySpeed;
             _playerRigidbody.velocity = new Vector2(_playerRigidbody.velocity.x, 0);
             _isFlying = true;
+            _flyAbilityPerformed = true;
         }
-        if (Input.GetKeyUp(KeyCode.LeftShift))
+        if (Input.GetKeyUp(KeyCode.LeftShift) || _flyingTimer <= 0 && _isFlying)
         {
             batForm.SetActive(false);
             playerForm.SetActive(true);
             _playerRigidbody.gravityScale = 1;
+            speed = _baseSpeed;
             _isFlying = false;
             _doubleJumpPerformed = true;
         }

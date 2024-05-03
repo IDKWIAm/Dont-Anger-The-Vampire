@@ -14,7 +14,10 @@ public class MenuManager : MonoBehaviour
     private void Start()
     {
         Time.timeScale = 1;
+
+        float difficultyMultiplyer = PlayerPrefs.GetFloat("DifficultyMultiplyer");
         PlayerPrefs.DeleteAll();
+        PlayerPrefs.SetFloat("DifficultyMultiplyer", difficultyMultiplyer);
         _target = settingsMenu;
     }
 
@@ -31,6 +34,13 @@ public class MenuManager : MonoBehaviour
     public void OpenSettings()
     {
         _target = mainMenu;
+    }
+
+    public void ChangeDifficulty(int difficultyNumber)
+    {
+        if (difficultyNumber == 0) PlayerPrefs.SetFloat("DifficultyMultiplyer", 0.75f);
+        if (difficultyNumber == 1) PlayerPrefs.SetFloat("DifficultyMultiplyer", 1);
+        if (difficultyNumber == 2) PlayerPrefs.SetFloat("DifficultyMultiplyer", 1.25f);
     }
 
     public void LoadGame()
