@@ -7,7 +7,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private float jumpForce = 7f;
     [SerializeField] private float flySpeed = 8f;
     [SerializeField] private float flyingTime = 3f;
-    [SerializeField] private float kojotTime = 0.2f;
+    [SerializeField] private float coyoteTime = 0.1f;
     [SerializeField] private float maxFallingSpeed = 10f;
     [SerializeField] private float weaponShowTime = 0.1f;
 
@@ -53,7 +53,7 @@ public class PlayerController : MonoBehaviour
 
     private float _timer;
     private float _KBCounter;
-    private float _kojotCounter;
+    private float _coyoteCounter;
     private float _flyingTimer;
 
     private float _defaultGravity;
@@ -84,9 +84,9 @@ public class PlayerController : MonoBehaviour
         return Physics2D.OverlapCircle(groundChecker.position, 0.2f, groundLayer);
     }
 
-    private bool CojotJumpEnable()
+    private bool CoyoteJumpEnable()
     {
-        return _kojotCounter > 0;
+        return _coyoteCounter > 0;
     }
     
 
@@ -102,7 +102,7 @@ public class PlayerController : MonoBehaviour
             }
         }
 
-        if (_kojotCounter > 0) _kojotCounter -= Time.deltaTime;
+        if (_coyoteCounter > 0) _coyoteCounter -= Time.deltaTime;
         if (_flyingTimer > 0) _flyingTimer -= Time.deltaTime;
     }
 
@@ -180,7 +180,7 @@ public class PlayerController : MonoBehaviour
 
         if (IsGrounded())
         {
-            _kojotCounter = kojotTime;
+            _coyoteCounter = coyoteTime;
             _doubleJumpPerformed = false;
         }
 
@@ -191,7 +191,7 @@ public class PlayerController : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.Space))
         {
-            if (IsGrounded() || CojotJumpEnable())
+            if (IsGrounded() || CoyoteJumpEnable())
             {
                 _playerRigidbody.velocity = new Vector2(_playerRigidbody.velocity.x, jumpForce);
             } 
@@ -240,7 +240,6 @@ public class PlayerController : MonoBehaviour
             speed = flySpeed;
             _playerRigidbody.velocity = new Vector2(_playerRigidbody.velocity.x, 0);
             _isFlying = true;
-            _flyAbilityPerformed = true;
         }
         if (Input.GetKeyUp(KeyCode.LeftShift) || _flyingTimer <= 0 && _isFlying)
         {
@@ -250,6 +249,7 @@ public class PlayerController : MonoBehaviour
             speed = _baseSpeed;
             _isFlying = false;
             _doubleJumpPerformed = true;
+            _flyAbilityPerformed = true;
         }
     }
 
@@ -268,13 +268,13 @@ public class PlayerController : MonoBehaviour
 
         if (!dashEnabled) return;
 
-        if (IsGrounded() || CojotJumpEnable()) _dashPerformed = false;
+        if (IsGrounded() || CoyoteJumpEnable()) _dashPerformed = false;
 
         if (Input.GetKeyDown(KeyCode.A))
         {
             if (_aPressed)
             {
-                if (IsGrounded() || CojotJumpEnable() || !_dashPerformed)
+                if (IsGrounded() || CoyoteJumpEnable() || !_dashPerformed)
                 {
                     _aPressed = false;
                     _dashPerformed = true;
@@ -293,7 +293,7 @@ public class PlayerController : MonoBehaviour
         {
             if (_dPressed)
             {
-                if (IsGrounded() || CojotJumpEnable() || !_dashPerformed)
+                if (IsGrounded() || CoyoteJumpEnable() || !_dashPerformed)
                 {
                     _dPressed = false;
                     _dashPerformed = true;
