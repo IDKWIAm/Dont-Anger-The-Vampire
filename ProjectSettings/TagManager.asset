@@ -5,11 +5,12 @@ TagManager:
   serializedVersion: 2
   tags:
   - Weapon
-  - Interactable
   - Dialogue Panel
   - First Attack Position
   - Second Attack Position
   - Third Attack Position
+  - Interactable
+  - Exit
   layers:
   - Default
   - TransparentFX
@@ -23,8 +24,8 @@ TagManager:
   - Walls
   - Enities
   - Player
-  - 
-  - 
+  - One-Way Platforms
+  - Ignore OW Platforms
   - 
   - 
   - 

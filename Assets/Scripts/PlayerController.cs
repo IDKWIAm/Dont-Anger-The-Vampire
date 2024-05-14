@@ -3,40 +3,40 @@
 public class PlayerController : MonoBehaviour
 {
     [Header("Player")]
-    [SerializeField] private float speed = 5f;
-    [SerializeField] private float jumpForce = 7f;
-    [SerializeField] private float flySpeed = 8f;
-    [SerializeField] private float flyingTime = 3f;
-    [SerializeField] private float coyoteTime = 0.1f;
-    [SerializeField] private float maxFallingSpeed = 10f;
-    [SerializeField] private float weaponShowTime = 0.1f;
+    [SerializeField] float speed = 5f;
+    [SerializeField] float jumpForce = 7f;
+    [SerializeField] float flySpeed = 8f;
+    [SerializeField] float flyingTime = 3f;
+    [SerializeField] float coyoteTime = 0.1f;
+    [SerializeField] float maxFallingSpeed = 10f;
+    [SerializeField] float weaponShowTime = 0.1f;
 
     [Header("Double Jump")]
-    [SerializeField] private bool doubleJumpEnabled;
+    [SerializeField] bool doubleJumpEnabled;
 
     [Header("Dash")]
-    [SerializeField] private bool dashEnabled;
-    [SerializeField] private float pressingInterval = 0.25f;
-    [SerializeField] private float dashTime = 1.5f;
-    [SerializeField] private float dashStrength = 8f;
-    [SerializeField] private float dashCooldown = 1f;
+    [SerializeField] bool dashEnabled;
+    [SerializeField] float pressingInterval = 0.25f;
+    [SerializeField] float dashTime = 1.5f;
+    [SerializeField] float dashStrength = 8f;
+    [SerializeField] float dashCooldown = 1f;
 
     [Header("Fast Falling")]
-    [SerializeField] private bool fastFallingEnabled;
-    [SerializeField] private float fastFallingMultiplier = 3f;
+    [SerializeField] bool fastFallingEnabled;
+    [SerializeField] float fastFallingMultiplier = 3f;
 
     [Space]
 
-    [SerializeField] private Transform groundChecker;
-    [SerializeField] private GameObject weapon;
-    [SerializeField] private GameObject playerForm;
-    [SerializeField] private GameObject batForm;
-    [SerializeField] private LayerMask groundLayer;
-    [SerializeField] private DialogueManager dialogueManager;
+    [SerializeField] Transform groundChecker;
+    [SerializeField] GameObject weapon;
+    [SerializeField] GameObject playerForm;
+    [SerializeField] GameObject batForm;
+    [SerializeField] LayerMask groundLayer;
+    [SerializeField] DialogueManager dialogueManager;
 
     private float _baseSpeed;
 
-    private bool _faceRight = true;
+    private bool _faceRight;
 
     private bool _isMovingX;
     private bool _isMovingY;
@@ -67,6 +67,7 @@ public class PlayerController : MonoBehaviour
         _defaultGravity = _playerRigidbody.gravityScale;
         _baseSpeed = speed;
         _flyBarValue = batForm.transform.GetChild(0);
+        if (transform.localScale.x == 1) _faceRight = true;
     }
 
     void Update()
@@ -188,6 +189,9 @@ public class PlayerController : MonoBehaviour
         {
             _playerRigidbody.gravityScale *= fastFallingMultiplier;
         }
+
+        if (Input.GetKeyDown(KeyCode.S)) playerForm.layer = 13;
+        if (Input.GetKeyUp(KeyCode.S)) playerForm.layer = 11;
 
         if (Input.GetKeyDown(KeyCode.Space))
         {

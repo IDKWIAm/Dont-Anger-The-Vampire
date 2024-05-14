@@ -10,7 +10,7 @@ public class ResultsManager : MonoBehaviour
     private void Start()
     {
         collectorsPunishedValue.text = PlayerPrefs.GetInt("collectorsPunished").ToString();
-        secretsFoundValue.text = PlayerPrefs.GetInt("secretsFound").ToString() + " / " + PlayerPrefs.GetInt("SecretsAmount");
+        secretsFoundValue.text = PlayerPrefs.GetInt("secretsFound").ToString() + " / " + PlayerPrefs.GetInt("secretsAmount");
     }
 
     public void BackToMainManu()

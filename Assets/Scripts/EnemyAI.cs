@@ -2,17 +2,17 @@
 
 public class EnemyAI : MonoBehaviour
 {
-    [SerializeField] private float speed = 4f;
-    [SerializeField] private float jumpForce = 8f;
-    [SerializeField] private float jumpDistance = 1f;
-    [SerializeField] private float visionRange = 20f;
-    [SerializeField] private float KBResistacnce = 30f; //In percents
-    [SerializeField] private Transform player;
-    [SerializeField] private Transform groundChecker;
-    [SerializeField] private LayerMask groundLayer;
-    [SerializeField] private Transform wallChecker;
-    [SerializeField] private LayerMask wallLayer;
-    [SerializeField] private Transform abyssChecker;
+    [SerializeField] float speed = 4f;
+    [SerializeField] float jumpForce = 8f;
+    [SerializeField] float jumpDistance = 1f;
+    [SerializeField] float visionRange = 20f;
+    [SerializeField] float KBResistacnce = 30f; //In percents
+    [SerializeField] Transform player;
+    [SerializeField] Transform groundChecker;
+    [SerializeField] LayerMask groundLayer;
+    [SerializeField] Transform wallChecker;
+    [SerializeField] LayerMask wallLayer;
+    [SerializeField] Transform abyssChecker;
 
     private bool _faceRight = true;
     private float _KBCounter;
@@ -63,6 +63,11 @@ public class EnemyAI : MonoBehaviour
         return player.position.y > transform.position.y && Mathf.Abs(player.position.x - transform.position.x) < jumpDistance && Mathf.Abs(player.position.y - transform.position.y) > transform.localScale.y / 2;
     }
 
+    private bool IsPlayerBelow()
+    {
+        return player.position.y < transform.position.y && Mathf.Abs(player.position.x - transform.position.x) < jumpDistance && Mathf.Abs(player.position.y - transform.position.y) > transform.localScale.y / 2;
+    }
+
     private bool NeedToFall()
     {
         return player.position.y < transform.position.y && Mathf.Abs(player.position.x - transform.position.x) < Mathf.Abs(player.position.y - transform.position.y);
@@ -72,6 +77,9 @@ public class EnemyAI : MonoBehaviour
     private void MoveUpdate()
     {
         if (Vector3.Distance(transform.position, player.position) > visionRange) return;
+
+        if (IsPlayerBelow()) gameObject.layer = 13;
+        else gameObject.layer = 10;
 
         if (_KBCounter > 0)
         {

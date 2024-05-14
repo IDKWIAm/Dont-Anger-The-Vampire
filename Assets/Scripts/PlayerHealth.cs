@@ -19,9 +19,13 @@ public class PlayerHealth : MonoBehaviour
     private int drawedHeartsInRow;
     private int currentRow;
 
+    private Animator _animator;
+
 
     private void Start()
     {
+        _animator = transform.GetChild(0).GetComponent<Animator>();
+
         health = startMaxHealth;
         for (int i = 0; i < startMaxHealth; i++)
         {
@@ -81,8 +85,14 @@ public class PlayerHealth : MonoBehaviour
     {
         health -= damage;
         CheckHealth();
+        _animator.SetTrigger("Hit");
+
         if (health <= 0)
         {
+            PlayerPrefs.SetInt("collectorsPunishedOnLevel", 0);
+            PlayerPrefs.SetInt("SecretsAmountOnLevel", 0);
+            PlayerPrefs.SetInt("secretsFoundOnLevel", 0);
+
             SceneManager.LoadScene(SceneManager.GetActiveScene().name);
         }
     }
