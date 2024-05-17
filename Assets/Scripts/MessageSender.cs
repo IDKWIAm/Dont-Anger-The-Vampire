@@ -2,9 +2,9 @@
 
 public class MessageSender : MonoBehaviour
 {
-    [SerializeField] private string message;
-    [SerializeField] private float letterAppearingDelay = 0.1f;
-    [SerializeField] private DialogueManager dialogueManager;
+    [SerializeField] string[] messages;
+    [SerializeField] float letterAppearingDelay = 0.1f;
+    [SerializeField] DialogueManager dialogueManager;
 
     private bool _collided;
 
@@ -13,7 +13,7 @@ public class MessageSender : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.E) && _collided && !dialogueManager.IsRunning())
         {
             dialogueManager.OpenWindow();
-            dialogueManager.DisplayMessage(message, letterAppearingDelay);
+            dialogueManager.DisplayMessage(messages, letterAppearingDelay);
         }
     }
 

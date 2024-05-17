@@ -2312,11 +2312,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player
       objectReference: {fileID: 0}
-    - target: {fileID: 9195161541961848161, guid: 656f9726d6a664f42b360548239c8f09,
-        type: 3}
-      propertyPath: m_Layer
-      value: 13
-      objectReference: {fileID: 0}
     - target: {fileID: 9195161542639313311, guid: 656f9726d6a664f42b360548239c8f09,
         type: 3}
       propertyPath: m_Color.b
@@ -2645,7 +2640,7 @@ PlatformEffector2D:
     serializedVersion: 2
     m_Bits: 7991
   m_RotationalOffset: 0
-  m_UseOneWay: 1
+  m_UseOneWay: 0
   m_UseOneWayGrouping: 0
   m_SurfaceArc: 180
   m_UseSideFriction: 0
@@ -3270,7 +3265,7 @@ PrefabInstance:
     - target: {fileID: 7189531266531455975, guid: 57c001456087a2c4d9e26c48f62e8317,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: -0.6
+      value: -0.868
       objectReference: {fileID: 0}
     - target: {fileID: 7189531266531455975, guid: 57c001456087a2c4d9e26c48f62e8317,
         type: 3}

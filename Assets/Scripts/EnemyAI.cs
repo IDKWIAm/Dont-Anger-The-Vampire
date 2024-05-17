@@ -7,7 +7,6 @@ public class EnemyAI : MonoBehaviour
     [SerializeField] float jumpDistance = 1f;
     [SerializeField] float visionRange = 20f;
     [SerializeField] float KBResistacnce = 30f; //In percents
-    [SerializeField] Transform player;
     [SerializeField] Transform groundChecker;
     [SerializeField] LayerMask groundLayer;
     [SerializeField] Transform wallChecker;
@@ -18,10 +17,12 @@ public class EnemyAI : MonoBehaviour
     private float _KBCounter;
 
     private Rigidbody2D _rigitbody;
+    private Transform _player;
 
     private void Start()
     {
         _rigitbody = GetComponent<Rigidbody2D>();
+        _player = GameObject.FindGameObjectWithTag("Player").transform;
 
         ApplyDifficulty();
 
@@ -60,23 +61,23 @@ public class EnemyAI : MonoBehaviour
 
     private bool IsPlayerAbove()
     {
-        return player.position.y > transform.position.y && Mathf.Abs(player.position.x - transform.position.x) < jumpDistance && Mathf.Abs(player.position.y - transform.position.y) > transform.localScale.y / 2;
+        return _player.position.y > transform.position.y && Mathf.Abs(_player.position.x - transform.position.x) < jumpDistance && Mathf.Abs(_player.position.y - transform.position.y) > transform.localScale.y / 2;
     }
 
     private bool IsPlayerBelow()
     {
-        return player.position.y < transform.position.y && Mathf.Abs(player.position.x - transform.position.x) < jumpDistance && Mathf.Abs(player.position.y - transform.position.y) > transform.localScale.y / 2;
+        return _player.position.y < transform.position.y && Mathf.Abs(_player.position.x - transform.position.x) < jumpDistance && Mathf.Abs(_player.position.y - transform.position.y) > transform.localScale.y / 2;
     }
 
     private bool NeedToFall()
     {
-        return player.position.y < transform.position.y && Mathf.Abs(player.position.x - transform.position.x) < Mathf.Abs(player.position.y - transform.position.y);
+        return _player.position.y < transform.position.y && Mathf.Abs(_player.position.x - transform.position.x) < Mathf.Abs(_player.position.y - transform.position.y);
     }
 
 
     private void MoveUpdate()
     {
-        if (Vector3.Distance(transform.position, player.position) > visionRange) return;
+        if (Vector3.Distance(transform.position, _player.position) > visionRange) return;
 
         if (IsPlayerBelow()) gameObject.layer = 13;
         else gameObject.layer = 10;
@@ -87,7 +88,7 @@ public class EnemyAI : MonoBehaviour
             return;
         }
 
-        if (player.position.x < transform.position.x)
+        if (_player.position.x < transform.position.x)
         {
             _rigitbody.velocity = new Vector2(-speed, _rigitbody.velocity.y);
             if (_faceRight)
@@ -96,7 +97,7 @@ public class EnemyAI : MonoBehaviour
                 _faceRight = false;
             }
         }
-        if (player.position.x > transform.position.x)
+        if (_player.position.x > transform.position.x)
         {
             _rigitbody.velocity = new Vector2(speed, _rigitbody.velocity.y);
             if (!_faceRight)
@@ -116,7 +117,7 @@ public class EnemyAI : MonoBehaviour
 
     private void JumpUpdate()
     {
-        if (Vector3.Distance(transform.position, player.position) > visionRange) return;
+        if (Vector3.Distance(transform.position, _player.position) > visionRange) return;
 
         if (IsGrounded())
         {

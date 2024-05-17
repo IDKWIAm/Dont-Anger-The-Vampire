@@ -29,9 +29,9 @@ public class BossHealth : MonoBehaviour
 
         if (health <= 0)
         {
+            bossHealthbar.transform.parent.gameObject.SetActive(false);
             for (int i = 0; i < bossWalls.Length; i++)
             {
-                bossHealthbar.transform.parent.gameObject.SetActive(false);
                 bossWalls[i].SetActive(false);
             }
 

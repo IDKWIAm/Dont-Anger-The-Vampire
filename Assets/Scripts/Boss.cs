@@ -4,20 +4,19 @@ public class Boss : MonoBehaviour
 {
     [SerializeField] private float attacksDelay = 5f;
 
-    [SerializeField] private GameObject boulder;
-    [SerializeField] private GameObject spike;
-    [SerializeField] private GameObject laserBeam;
+    [SerializeField] GameObject boulder;
+    [SerializeField] GameObject spike;
+    [SerializeField] GameObject laserBeam;
+
+    [SerializeField] GameObject[] _firstAttackPositions;
+    [SerializeField] GameObject[] _secondAttackPositions;
+    [SerializeField] GameObject[] _thirdAttackPositions;
 
     private float _timer;
-
-    private GameObject[] _firstAttackPositions;
-    private GameObject[] _secondAttackPositions;
-    private GameObject[] _thirdAttackPositions;
 
     private void Start()
     {
         ApplyDifficulty();
-        InitAttackPositions();
         _timer = attacksDelay;
     }
 
@@ -53,13 +52,6 @@ public class Boss : MonoBehaviour
         if (difficultyMultiplyer == 1.25f) difficultyMultiplyer = 0.75f;
 
         attacksDelay *= difficultyMultiplyer;
-    }
-
-    private void InitAttackPositions()
-    {
-        _firstAttackPositions = GameObject.FindGameObjectsWithTag("First Attack Position");
-        _secondAttackPositions = GameObject.FindGameObjectsWithTag("Second Attack Position");
-        _thirdAttackPositions = GameObject.FindGameObjectsWithTag("Third Attack Position");
     }
 
     private void FirstAttack()

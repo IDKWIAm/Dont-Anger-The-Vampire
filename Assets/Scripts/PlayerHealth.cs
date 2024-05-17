@@ -90,7 +90,7 @@ public class PlayerHealth : MonoBehaviour
         if (health <= 0)
         {
             PlayerPrefs.SetInt("collectorsPunishedOnLevel", 0);
-            PlayerPrefs.SetInt("SecretsAmountOnLevel", 0);
+            PlayerPrefs.SetInt("secretsAmountOnLevel", 0);
             PlayerPrefs.SetInt("secretsFoundOnLevel", 0);
 
             SceneManager.LoadScene(SceneManager.GetActiveScene().name);

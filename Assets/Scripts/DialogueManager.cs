@@ -11,13 +11,29 @@ public class DialogueManager : MonoBehaviour
     private float _timer;
     private bool _skip;
 
+    private int _idx;
+
+    private string[] _messages;
+    private float _letterAppearingDelay;
+
     private void Update()
     {
         if (Input.GetMouseButtonDown(1))
         {
             if (_textAppeared == true)
             {
-                CloseWindow();
+                _idx++;
+                _skip = false;
+                if (_idx < _messages.Length)
+                {
+                    StartCoroutine(GradualTextAppearing(_messages[_idx], _letterAppearingDelay));
+                    _textAppeared = false;
+                }
+                else
+                {
+                    _idx = 0;
+                    CloseWindow();
+                }
             }
             else
             {
@@ -55,9 +71,12 @@ public class DialogueManager : MonoBehaviour
         _textAppeared = true;
     }
 
-    public void DisplayMessage(string message, float letterAppearingDelay)
+    public void DisplayMessage(string[] messages, float letterAppearingDelay)
     {
-        StartCoroutine(GradualTextAppearing(message, letterAppearingDelay));
+        _messages = messages;
+        _letterAppearingDelay = letterAppearingDelay;
+
+        StartCoroutine(GradualTextAppearing(messages[_idx], letterAppearingDelay));
     }
 
     public void OpenWindow()

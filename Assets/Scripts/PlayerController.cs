@@ -29,7 +29,7 @@ public class PlayerController : MonoBehaviour
 
     [SerializeField] Transform groundChecker;
     [SerializeField] GameObject weapon;
-    [SerializeField] GameObject playerForm;
+    [SerializeField] GameObject vampireForm;
     [SerializeField] GameObject batForm;
     [SerializeField] LayerMask groundLayer;
     [SerializeField] DialogueManager dialogueManager;
@@ -60,10 +60,13 @@ public class PlayerController : MonoBehaviour
 
     private Rigidbody2D _playerRigidbody;
     private Transform _flyBarValue;
+    private Animator _vampireFormAnimator;
 
     private void Start()
     {
         _playerRigidbody = GetComponent<Rigidbody2D>();
+        _vampireFormAnimator = vampireForm.GetComponent<Animator>();
+
         _defaultGravity = _playerRigidbody.gravityScale;
         _baseSpeed = speed;
         _flyBarValue = batForm.transform.GetChild(0);
@@ -110,6 +113,7 @@ public class PlayerController : MonoBehaviour
     private void MoveUpdate()
     {
         _isMovingX = false;
+        _vampireFormAnimator.SetBool("IsRunning", false);
 
         if (_KBCounter > 0)
         {
@@ -164,6 +168,8 @@ public class PlayerController : MonoBehaviour
         {
             _playerRigidbody.velocity = new Vector2(0, _playerRigidbody.velocity.y);
         }
+
+        if (_isMovingX && !_isFlying) _vampireFormAnimator.SetBool("IsRunning", true);
     }
 
     private void MirrorCharacter()
@@ -190,8 +196,8 @@ public class PlayerController : MonoBehaviour
             _playerRigidbody.gravityScale *= fastFallingMultiplier;
         }
 
-        if (Input.GetKeyDown(KeyCode.S)) playerForm.layer = 13;
-        if (Input.GetKeyUp(KeyCode.S)) playerForm.layer = 11;
+        if (Input.GetKeyDown(KeyCode.S)) vampireForm.layer = 13;
+        if (Input.GetKeyUp(KeyCode.S)) vampireForm.layer = 11;
 
         if (Input.GetKeyDown(KeyCode.Space))
         {
@@ -239,7 +245,7 @@ public class PlayerController : MonoBehaviour
             _flyingTimer = flyingTime;
             weapon.SetActive(false);
             batForm.SetActive(true);
-            playerForm.SetActive(false);
+            vampireForm.SetActive(false);
             _playerRigidbody.gravityScale = 0;
             speed = flySpeed;
             _playerRigidbody.velocity = new Vector2(_playerRigidbody.velocity.x, 0);
@@ -248,12 +254,13 @@ public class PlayerController : MonoBehaviour
         if (Input.GetKeyUp(KeyCode.LeftShift) || _flyingTimer <= 0 && _isFlying)
         {
             batForm.SetActive(false);
-            playerForm.SetActive(true);
+            vampireForm.SetActive(true);
             _playerRigidbody.gravityScale = 1;
             speed = _baseSpeed;
             _isFlying = false;
             _doubleJumpPerformed = true;
             _flyAbilityPerformed = true;
+            vampireForm.layer = 11;
         }
     }
 

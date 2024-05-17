@@ -6,9 +6,6 @@ TagManager:
   tags:
   - Weapon
   - Dialogue Panel
-  - First Attack Position
-  - Second Attack Position
-  - Third Attack Position
   - Interactable
   - Exit
   layers:
