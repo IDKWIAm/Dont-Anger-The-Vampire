@@ -9,6 +9,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] float flyingTime = 3f;
     [SerializeField] float coyoteTime = 0.1f;
     [SerializeField] float maxFallingSpeed = 10f;
+    [SerializeField] public bool weaponEnabled = true;
     [SerializeField] float weaponShowTime = 0.1f;
 
     [Header("Double Jump")]
@@ -196,8 +197,16 @@ public class PlayerController : MonoBehaviour
             _playerRigidbody.gravityScale *= fastFallingMultiplier;
         }
 
-        if (Input.GetKeyDown(KeyCode.S)) vampireForm.layer = 13;
-        if (Input.GetKeyUp(KeyCode.S)) vampireForm.layer = 11;
+        if (Input.GetKeyDown(KeyCode.S)) 
+        { 
+            vampireForm.layer = 13;
+            batForm.layer = 13;
+        }
+        if (Input.GetKeyUp(KeyCode.S))
+        {
+            vampireForm.layer = 11;
+            batForm.layer = 11;
+        }
 
         if (Input.GetKeyDown(KeyCode.Space))
         {
@@ -223,6 +232,7 @@ public class PlayerController : MonoBehaviour
         if (_isFlying) return;
         if (dialogueManager.IsRunning()) return;
         if (Time.timeScale == 0) return;
+        if (weaponEnabled == false) return;
 
         if (Input.GetMouseButtonDown(0))
         {

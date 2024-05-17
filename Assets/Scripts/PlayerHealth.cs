@@ -1,18 +1,20 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class PlayerHealth : MonoBehaviour
 {
-    [SerializeField] private int health = 5;
-    [SerializeField] private int startMaxHealth = 5;
-    [SerializeField] private int maxHealth = 12;
-    [SerializeField] private int heartsInRow = 6;
-    
-    [SerializeField] private Image heartPoint;
-    [SerializeField] private Transform parentCanvas;
-    [SerializeField] private RectTransform heartsStartPos;
+    [SerializeField] int health = 5;
+    [SerializeField] int startMaxHealth = 5;
+    [SerializeField] int maxHealth = 12;
+    [SerializeField] int heartsInRow = 6;
+
+    [SerializeField] GameObject deathBG;
+    [SerializeField] GameObject deathText;
+    [SerializeField] SpriteRenderer vampireForm;
+    [SerializeField] Image heartPoint;
+    [SerializeField] Transform parentCanvas;
+    [SerializeField] RectTransform heartsStartPos;
 
     private List<GameObject> hearts = new List<GameObject>();
 
@@ -24,6 +26,7 @@ public class PlayerHealth : MonoBehaviour
 
     private void Start()
     {
+        Time.timeScale = 1;
         _animator = transform.GetChild(0).GetComponent<Animator>();
 
         health = startMaxHealth;
@@ -63,6 +66,23 @@ public class PlayerHealth : MonoBehaviour
         }
     }
 
+    private void Death()
+    {
+        PlayerPrefs.SetInt("collectorsPunishedOnLevel", 0);
+        PlayerPrefs.SetInt("secretsAmountOnLevel", 0);
+        PlayerPrefs.SetInt("secretsFoundOnLevel", 0);
+
+        deathText.SetActive(true);
+        deathBG.SetActive(true);
+        foreach (GameObject heart in hearts)
+        {
+            heart.SetActive(false);
+        }
+        vampireForm.sortingOrder = 3;
+
+        Time.timeScale = 0;
+    }
+
     public void HealthUp()
     {
         if (startMaxHealth < maxHealth)
@@ -89,11 +109,7 @@ public class PlayerHealth : MonoBehaviour
 
         if (health <= 0)
         {
-            PlayerPrefs.SetInt("collectorsPunishedOnLevel", 0);
-            PlayerPrefs.SetInt("secretsAmountOnLevel", 0);
-            PlayerPrefs.SetInt("secretsFoundOnLevel", 0);
-
-            SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+            Death();
         }
     }
 }
