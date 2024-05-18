@@ -59,19 +59,19 @@ public class PlayerController : MonoBehaviour
 
     private float _defaultGravity;
 
-    private Rigidbody2D _playerRigidbody;
+    private Rigidbody2D _playerRigitbody;
     private Transform _flyBarValue;
     private Animator _vampireFormAnimator;
 
     private void Start()
     {
-        _playerRigidbody = GetComponent<Rigidbody2D>();
+        _playerRigitbody = GetComponent<Rigidbody2D>();
         _vampireFormAnimator = vampireForm.GetComponent<Animator>();
 
-        _defaultGravity = _playerRigidbody.gravityScale;
+        _defaultGravity = _playerRigitbody.gravityScale;
         _baseSpeed = speed;
         _flyBarValue = batForm.transform.GetChild(0);
-        if (transform.localScale.x == 1) _faceRight = true;
+        if (transform.localScale.x > 0) _faceRight = true;
     }
 
     void Update()
@@ -124,7 +124,7 @@ public class PlayerController : MonoBehaviour
 
         if (Input.GetKey(KeyCode.A))
         {
-            _playerRigidbody.velocity = new Vector2(-speed, _playerRigidbody.velocity.y);
+            _playerRigitbody.velocity = new Vector2(-speed, _playerRigitbody.velocity.y);
             _isMovingX = true;
             if (_faceRight)
             {
@@ -134,7 +134,7 @@ public class PlayerController : MonoBehaviour
         }
         if (Input.GetKey(KeyCode.D))
         {
-            _playerRigidbody.velocity = new Vector2(speed, _playerRigidbody.velocity.y);
+            _playerRigitbody.velocity = new Vector2(speed, _playerRigitbody.velocity.y);
             _isMovingX = true;
             if (!_faceRight)
             {
@@ -150,24 +150,24 @@ public class PlayerController : MonoBehaviour
 
             if (Input.GetKey(KeyCode.W))
             {
-                _playerRigidbody.velocity = new Vector2(_playerRigidbody.velocity.x, speed);
+                _playerRigitbody.velocity = new Vector2(_playerRigitbody.velocity.x, speed);
                 _isMovingY = true;
             }
             if (Input.GetKey(KeyCode.S))
             {
-                _playerRigidbody.velocity = new Vector2(_playerRigidbody.velocity.x, -speed);
+                _playerRigitbody.velocity = new Vector2(_playerRigitbody.velocity.x, -speed);
                 _isMovingY = true;
             }
 
             if (!_isMovingY)
             {
-                _playerRigidbody.velocity = new Vector2(_playerRigidbody.velocity.x, 0);
+                _playerRigitbody.velocity = new Vector2(_playerRigitbody.velocity.x, 0);
             }
         }
 
         if (!_isMovingX && !_dashRight && !_dashLeft)
         {
-            _playerRigidbody.velocity = new Vector2(0, _playerRigidbody.velocity.y);
+            _playerRigitbody.velocity = new Vector2(0, _playerRigitbody.velocity.y);
         }
 
         if (_isMovingX && !_isFlying) _vampireFormAnimator.SetBool("IsRunning", true);
@@ -182,23 +182,8 @@ public class PlayerController : MonoBehaviour
 
     private void JumpUpdate()
     {
-        if (_isFlying) return;
-
-        _playerRigidbody.gravityScale = _defaultGravity;
-
-        if (IsGrounded())
+        if (Input.GetKeyDown(KeyCode.S))
         {
-            _coyoteCounter = coyoteTime;
-            _doubleJumpPerformed = false;
-        }
-
-        if (Input.GetKey(KeyCode.S) && fastFallingEnabled)
-        {
-            _playerRigidbody.gravityScale *= fastFallingMultiplier;
-        }
-
-        if (Input.GetKeyDown(KeyCode.S)) 
-        { 
             vampireForm.layer = 13;
             batForm.layer = 13;
         }
@@ -208,22 +193,37 @@ public class PlayerController : MonoBehaviour
             batForm.layer = 11;
         }
 
+        if (_isFlying) return;
+
+        _playerRigitbody.gravityScale = _defaultGravity;
+
+        if (IsGrounded())
+        {
+            _coyoteCounter = coyoteTime;
+            _doubleJumpPerformed = false;
+        }
+
+        if (Input.GetKey(KeyCode.S) && fastFallingEnabled)
+        {
+            _playerRigitbody.gravityScale *= fastFallingMultiplier;
+        }
+
         if (Input.GetKeyDown(KeyCode.Space))
         {
             if (IsGrounded() || CoyoteJumpEnable())
             {
-                _playerRigidbody.velocity = new Vector2(_playerRigidbody.velocity.x, jumpForce);
+                _playerRigitbody.velocity = new Vector2(_playerRigitbody.velocity.x, jumpForce);
             } 
             else if (doubleJumpEnabled && !_doubleJumpPerformed)
             {
-                _playerRigidbody.velocity = new Vector2(_playerRigidbody.velocity.x, jumpForce);
+                _playerRigitbody.velocity = new Vector2(_playerRigitbody.velocity.x, jumpForce);
                 _doubleJumpPerformed = true;
             }
         }
 
-        if (_playerRigidbody.velocity.y < -maxFallingSpeed)
+        if (_playerRigitbody.velocity.y < -maxFallingSpeed)
         {
-            _playerRigidbody.velocity = new Vector2(_playerRigidbody.velocity.x, -maxFallingSpeed);
+            _playerRigitbody.velocity = new Vector2(_playerRigitbody.velocity.x, -maxFallingSpeed);
         }
     }
 
@@ -256,16 +256,16 @@ public class PlayerController : MonoBehaviour
             weapon.SetActive(false);
             batForm.SetActive(true);
             vampireForm.SetActive(false);
-            _playerRigidbody.gravityScale = 0;
+            _playerRigitbody.gravityScale = 0;
             speed = flySpeed;
-            _playerRigidbody.velocity = new Vector2(_playerRigidbody.velocity.x, 0);
+            _playerRigitbody.velocity = new Vector2(_playerRigitbody.velocity.x, 0);
             _isFlying = true;
         }
         if (Input.GetKeyUp(KeyCode.LeftShift) || _flyingTimer <= 0 && _isFlying)
         {
             batForm.SetActive(false);
             vampireForm.SetActive(true);
-            _playerRigidbody.gravityScale = 1;
+            _playerRigitbody.gravityScale = 1;
             speed = _baseSpeed;
             _isFlying = false;
             _doubleJumpPerformed = true;
@@ -280,11 +280,11 @@ public class PlayerController : MonoBehaviour
 
         if (_dashRight)
         {
-            _playerRigidbody.velocity = new Vector2(dashStrength, _playerRigidbody.velocity.y);
+            _playerRigitbody.velocity = new Vector2(dashStrength, _playerRigitbody.velocity.y);
         } 
         else if (_dashLeft)
         {
-            _playerRigidbody.velocity = new Vector2(-dashStrength, _playerRigidbody.velocity.y);
+            _playerRigitbody.velocity = new Vector2(-dashStrength, _playerRigitbody.velocity.y);
         }
 
         if (!dashEnabled) return;
@@ -347,9 +347,17 @@ public class PlayerController : MonoBehaviour
 
     public void Knock(float KBForce, float KBTime, bool knockFromRight)
     {
+        DisableDashLeft();
+        DisableDashRight();
         _KBCounter = KBTime;
         
-        if (knockFromRight) _playerRigidbody.velocity = new Vector2(-KBForce, KBForce);
-        else _playerRigidbody.velocity = new Vector2(KBForce, KBForce);
+        if (knockFromRight) _playerRigitbody.velocity = new Vector2(-KBForce, KBForce);
+        else _playerRigitbody.velocity = new Vector2(KBForce, KBForce);
+    }
+
+    public void DisableMovement()
+    {
+        _vampireFormAnimator.SetBool("IsRunning", false);
+        _playerRigitbody.velocity = new Vector2(0, _playerRigitbody.velocity.y);
     }
 }

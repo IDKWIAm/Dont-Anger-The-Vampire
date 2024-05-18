@@ -8,6 +8,8 @@ public class MenuManager : MonoBehaviour
     [SerializeField] private Transform mainMenu;
     [SerializeField] private Transform settingsMenu;
     [SerializeField] private Transform paintings;
+    [SerializeField] private Transform playDistancing;
+    [SerializeField] private GameObject fadeIn;
 
     private Transform _target;
 
@@ -41,6 +43,13 @@ public class MenuManager : MonoBehaviour
         if (difficultyNumber == 0) PlayerPrefs.SetFloat("DifficultyMultiplyer", 0.75f);
         if (difficultyNumber == 1) PlayerPrefs.SetFloat("DifficultyMultiplyer", 1);
         if (difficultyNumber == 2) PlayerPrefs.SetFloat("DifficultyMultiplyer", 1.25f);
+    }
+
+    public void StartGame()
+    {
+        speed /= 3;
+        _target = playDistancing;
+        fadeIn.SetActive(true);
     }
 
     public void LoadGame()

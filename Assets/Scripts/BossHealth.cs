@@ -8,8 +8,12 @@ public class BossHealth : MonoBehaviour
 
     private float _maxHealth;
 
+    private Exit _exit;
+
     private void Start()
     {
+        _exit = GameObject.FindGameObjectWithTag("Exit").GetComponent<Exit>();
+
         ApplyDifficulty();
         _maxHealth = health;
     }
@@ -34,6 +38,7 @@ public class BossHealth : MonoBehaviour
             {
                 bossWalls[i].SetActive(false);
             }
+            _exit.canExit = true;
 
             Destroy(gameObject);
         }

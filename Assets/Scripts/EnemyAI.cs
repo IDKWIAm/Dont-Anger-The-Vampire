@@ -13,7 +13,7 @@ public class EnemyAI : MonoBehaviour
     [SerializeField] LayerMask wallLayer;
     [SerializeField] Transform abyssChecker;
 
-    private bool _faceRight = true;
+    private bool _faceRight;
     private float _KBCounter;
 
     private Rigidbody2D _rigitbody;
@@ -27,6 +27,7 @@ public class EnemyAI : MonoBehaviour
         ApplyDifficulty();
 
         KBResistacnce = 1f - Mathf.Clamp(KBResistacnce / 100, 0, 1);
+        if (transform.localScale.x > 0) _faceRight = true;
     }
 
     private void Update()

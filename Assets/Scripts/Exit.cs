@@ -3,22 +3,13 @@ using UnityEngine.SceneManagement;
 
 public class Exit : MonoBehaviour
 {
-    private int enemiesKilledCount;
-    private int _enemiesAmount;
+    [SerializeField] GameObject fadeIn;
 
-    public void AddCount()
-    {
-        enemiesKilledCount += 1;
-    }
-
-    public void AddEnemy()
-    {
-        _enemiesAmount += 1;
-    }
+    [HideInInspector] public bool canExit;
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if (enemiesKilledCount == _enemiesAmount)
+        if (collision.gameObject.TryGetComponent<PlayerController>(out PlayerController playerController) && canExit)
         {
             PlayerPrefs.SetInt("collectorsPunished", PlayerPrefs.GetInt("collectorsPunished") + PlayerPrefs.GetInt("collectorsPunishedOnLevel"));
             PlayerPrefs.SetInt("secretsAmount", PlayerPrefs.GetInt("secretsAmount") + PlayerPrefs.GetInt("secretsAmountOnLevel"));
@@ -28,7 +19,12 @@ public class Exit : MonoBehaviour
             PlayerPrefs.SetInt("secretsAmountOnLevel", 0);
             PlayerPrefs.SetInt("secretsFoundOnLevel", 0);
 
-            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+            fadeIn.SetActive(true);
         }
+    }
+
+    public void LoadNextLevel()
+    {
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
     }
 }

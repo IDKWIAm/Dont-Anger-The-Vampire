@@ -1,10 +1,12 @@
-﻿using UnityEngine;
+﻿using System.Collections.Generic;
+using UnityEngine;
 
 public class MessageSender : MonoBehaviour
 {
     [SerializeField] bool sendOnContact;
-    [SerializeField] string[] messages;
+    [SerializeField] bool sendOnce;
     [SerializeField] float letterAppearingDelay = 0.05f;
+    [SerializeField] List<DialogueVariables> messages;
     [SerializeField] DialogueManager dialogueManager;
 
     private bool _collided;
@@ -26,7 +28,7 @@ public class MessageSender : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.gameObject.layer == 11)
+        if (collision.tag == "Player")
         {
             if (sendOnContact)
             {
@@ -37,13 +39,13 @@ public class MessageSender : MonoBehaviour
     }
     private void OnTriggerExit2D(Collider2D collision)
     {
-        if (collision.gameObject.layer == 11)
+        if (collision.tag == "Player")
         {
-            if (sendOnContact) _collider.enabled = false;
+            if (sendOnContact && sendOnce) _collider.enabled = false;
             else
             {
                 _collided = false;
-                dialogueManager.CloseWindow();
+                //dialogueManager.CloseWindow();
             }
         }
     }
@@ -52,5 +54,6 @@ public class MessageSender : MonoBehaviour
     {
         dialogueManager.OpenWindow();
         dialogueManager.DisplayMessage(messages, letterAppearingDelay);
+        if (sendOnce) _collider.enabled = false;
     }
 }

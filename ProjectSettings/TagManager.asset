@@ -8,6 +8,8 @@ TagManager:
   - Dialogue Panel
   - Interactable
   - Exit
+  - Enemy Counter
+  - Prologue Manager
   layers:
   - Default
   - TransparentFX

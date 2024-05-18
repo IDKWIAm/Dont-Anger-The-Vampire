@@ -1,10 +1,12 @@
 ﻿using System.Collections;
+using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 
 public class DialogueManager : MonoBehaviour
 {
-    [SerializeField] private TextMeshProUGUI messageText;
+    [SerializeField] TextMeshProUGUI messageText;
+    [SerializeField] TextMeshProUGUI speakerNameText;
 
     private bool _textAppeared;
     private bool _isRunning;
@@ -13,8 +15,16 @@ public class DialogueManager : MonoBehaviour
 
     private int _idx;
 
-    private string[] _messages;
+    private List<DialogueVariables> _messages;
     private float _letterAppearingDelay;
+
+    [HideInInspector] public bool needAttack;
+    private PrologueManager _prologueManager;
+
+    private void Start()
+    {
+        _prologueManager = GameObject.FindGameObjectWithTag("Prologue Manager").GetComponent<PrologueManager>();
+    }
 
     private void Update()
     {
@@ -24,15 +34,16 @@ public class DialogueManager : MonoBehaviour
             {
                 _idx++;
                 _skip = false;
-                if (_idx < _messages.Length)
+                if (_idx < _messages.Count)
                 {
-                    StartCoroutine(GradualTextAppearing(_messages[_idx], _letterAppearingDelay));
+                    StartCoroutine(GradualTextAppearing(_messages[_idx].speakerName, _messages[_idx].speakerColor, _messages[_idx].message, _letterAppearingDelay));
                     _textAppeared = false;
                 }
                 else
                 {
                     _idx = 0;
                     CloseWindow();
+                    if (needAttack) _prologueManager?.EnemyAttack();
                 }
             }
             else
@@ -47,9 +58,17 @@ public class DialogueManager : MonoBehaviour
         }
     }
 
-    IEnumerator GradualTextAppearing(string message, float letterAppearingDelay)
+    IEnumerator GradualTextAppearing(string speakerName, Color speakerColor, string message, float letterAppearingDelay)
     {
         _isRunning = true;
+
+        speakerNameText.color = speakerColor;
+        if (speakerName == "") speakerNameText.transform.parent.gameObject.SetActive(false);
+        else 
+        {
+            speakerNameText.transform.parent.gameObject.SetActive(true);
+            speakerNameText.text = speakerName; 
+        }
 
         for (int i = 0; i < message.Length; i++)
         {
@@ -71,12 +90,12 @@ public class DialogueManager : MonoBehaviour
         _textAppeared = true;
     }
 
-    public void DisplayMessage(string[] messages, float letterAppearingDelay)
+    public void DisplayMessage(List<DialogueVariables> messages, float letterAppearingDelay)
     {
         _messages = messages;
         _letterAppearingDelay = letterAppearingDelay;
 
-        StartCoroutine(GradualTextAppearing(messages[_idx], letterAppearingDelay));
+        StartCoroutine(GradualTextAppearing(messages[_idx].speakerName, messages[_idx].speakerColor, messages[_idx].message, letterAppearingDelay));
     }
 
     public void OpenWindow()

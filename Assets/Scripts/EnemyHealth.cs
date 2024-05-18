@@ -2,17 +2,17 @@
 
 public class EnemyHealth : MonoBehaviour
 {
-    [SerializeField] float health = 100f;
+    [SerializeField] float health = 7f;
 
-    private Exit _exit;
+    private EnemyCounter _enemyCounter;
     private Animator _animator;
 
     private void Start()
     {
         _animator = GetComponent<Animator>();
-        _exit = GameObject.FindGameObjectWithTag("Exit").GetComponent<Exit>();
+        _enemyCounter = GameObject.FindGameObjectWithTag("Enemy Counter").GetComponent<EnemyCounter>();
 
-        _exit.AddEnemy();
+        _enemyCounter.AddEnemy();
         ApplyDifficulty();
     }
 
@@ -26,7 +26,7 @@ public class EnemyHealth : MonoBehaviour
 
     private void Death()
     {
-        _exit.AddCount();
+        _enemyCounter.AddCount();
         PlayerPrefs.SetInt("collectorsPunishedOnLevel", PlayerPrefs.GetInt("collectorsPunishedOnLevel") + 1);
         Destroy(gameObject);
     }
