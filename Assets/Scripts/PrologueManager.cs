@@ -5,7 +5,7 @@ public class PrologueManager : MonoBehaviour
     [SerializeField] GameObject chest;
     [SerializeField] GameObject bottle;
     [SerializeField] GameObject collector;
-    [SerializeField] DialogueManager _dialogueManager;
+    [SerializeField] DialogueManager dialogueManager;
 
     private BoxCollider2D _collider;
     private PlayerController _playerController;
@@ -22,7 +22,7 @@ public class PrologueManager : MonoBehaviour
         {
             _playerController.DisableMovement();
             _playerController.enabled = false;
-            _dialogueManager.needAttack = true;
+            dialogueManager.needAttack = true;
         }
     }
 
@@ -41,6 +41,7 @@ public class PrologueManager : MonoBehaviour
     {
         collector.GetComponent<EnemyAI>().enabled = true;
         collector.GetComponent<EnemyHealth>().enabled = true;
+        collector.GetComponent<Animator>().enabled = true;
         _playerController.enabled = true;
     }
 }

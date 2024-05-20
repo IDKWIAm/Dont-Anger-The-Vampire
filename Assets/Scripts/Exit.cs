@@ -9,8 +9,11 @@ public class Exit : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.gameObject.TryGetComponent<PlayerController>(out PlayerController playerController) && canExit)
+        if (collision.gameObject.TryGetComponent<PlayerHealth>(out PlayerHealth playerHealth) && canExit)
         {
+            PlayerPrefs.SetInt("Player health", playerHealth.health);
+            PlayerPrefs.SetInt("Player start max health", playerHealth.startMaxHealth);
+
             PlayerPrefs.SetInt("collectorsPunished", PlayerPrefs.GetInt("collectorsPunished") + PlayerPrefs.GetInt("collectorsPunishedOnLevel"));
             PlayerPrefs.SetInt("secretsAmount", PlayerPrefs.GetInt("secretsAmount") + PlayerPrefs.GetInt("secretsAmountOnLevel"));
             PlayerPrefs.SetInt("secretsFound", PlayerPrefs.GetInt("secretsFound") + PlayerPrefs.GetInt("secretsFoundOnLevel"));

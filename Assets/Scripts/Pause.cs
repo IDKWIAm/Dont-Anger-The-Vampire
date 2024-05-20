@@ -25,6 +25,11 @@ public class Pause : MonoBehaviour
         Time.timeScale = 1;
     }
 
+    public void ChangeVolume(float volume)
+    {
+        AudioListener.volume = volume;
+    }
+
     public void BackToMainMenu()
     {
         SceneManager.LoadScene(0);

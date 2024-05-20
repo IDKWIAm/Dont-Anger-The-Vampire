@@ -53,7 +53,7 @@ public class PlayerController : MonoBehaviour
     private bool _aPressed;
 
     private float _timer;
-    private float _KBCounter;
+    [HideInInspector] public float _KBCounter;
     private float _coyoteCounter;
     private float _flyingTimer;
 
@@ -347,6 +347,8 @@ public class PlayerController : MonoBehaviour
 
     public void Knock(float KBForce, float KBTime, bool knockFromRight)
     {
+        if (_KBCounter > 0) return;
+
         DisableDashLeft();
         DisableDashRight();
         _KBCounter = KBTime;

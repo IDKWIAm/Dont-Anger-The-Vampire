@@ -16,11 +16,14 @@ public class MenuManager : MonoBehaviour
     private void Start()
     {
         Time.timeScale = 1;
+        var backgroundMusic = GameObject.FindGameObjectWithTag("Background Music");
+        if (backgroundMusic != null) Destroy(backgroundMusic);
 
         float difficultyMultiplyer = PlayerPrefs.GetFloat("DifficultyMultiplyer");
         PlayerPrefs.DeleteAll();
         PlayerPrefs.SetFloat("DifficultyMultiplyer", difficultyMultiplyer);
         _target = settingsMenu;
+        AudioListener.volume = 0.5f;
     }
 
     private void Update()
@@ -55,6 +58,11 @@ public class MenuManager : MonoBehaviour
     public void LoadGame()
     {
         SceneManager.LoadScene(1);
+    }
+
+    public void ChangeVolume(float volume)
+    {
+        AudioListener.volume = volume;
     }
 
     public void Exit()

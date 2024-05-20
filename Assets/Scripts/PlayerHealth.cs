@@ -4,13 +4,14 @@ using UnityEngine.UI;
 
 public class PlayerHealth : MonoBehaviour
 {
-    [SerializeField] int health = 5;
-    [SerializeField] int startMaxHealth = 5;
+    public int health = 5;
+    public int startMaxHealth = 5;
     [SerializeField] int maxHealth = 12;
     [SerializeField] int heartsInRow = 6;
 
     [SerializeField] GameObject deathBG;
     [SerializeField] GameObject deathText;
+    [SerializeField] GameObject bossHealthBar;
     [SerializeField] SpriteRenderer vampireForm;
     [SerializeField] Image heartPoint;
     [SerializeField] Transform parentCanvas;
@@ -22,14 +23,24 @@ public class PlayerHealth : MonoBehaviour
     private int currentRow;
 
     private Animator _animator;
-
+    private PlayerController _playerController;
 
     private void Start()
     {
         Time.timeScale = 1;
         _animator = transform.GetChild(0).GetComponent<Animator>();
+        _playerController = GetComponent<PlayerController>();
 
-        health = startMaxHealth;
+        if (PlayerPrefs.HasKey("Player health") && PlayerPrefs.HasKey("Player start max health"))
+        {
+            startMaxHealth = PlayerPrefs.GetInt("Player start max health");
+            health = PlayerPrefs.GetInt("Player health");
+        }
+        else
+        {
+            health = startMaxHealth;
+        }
+
         for (int i = 0; i < startMaxHealth; i++)
         {
             CreateHeart();
@@ -72,13 +83,14 @@ public class PlayerHealth : MonoBehaviour
         PlayerPrefs.SetInt("secretsAmountOnLevel", 0);
         PlayerPrefs.SetInt("secretsFoundOnLevel", 0);
 
+        bossHealthBar.SetActive(false);
         deathText.SetActive(true);
         deathBG.SetActive(true);
         foreach (GameObject heart in hearts)
         {
             heart.SetActive(false);
         }
-        vampireForm.sortingOrder = 3;
+        vampireForm.sortingOrder = 11;
 
         Time.timeScale = 0;
     }
@@ -103,6 +115,8 @@ public class PlayerHealth : MonoBehaviour
 
     public void DealDamage(int damage)
     {
+        if (_playerController._KBCounter > 0) return;
+
         health -= damage;
         CheckHealth();
         _animator.SetTrigger("Hit");

@@ -15,20 +15,20 @@ public class Bottle : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.E) && _collided)
         {
-            _prologueManager.EnableEnemy();
+            _prologueManager.EnableChest();
         }
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.gameObject.layer == 11)
+        if (collision.tag == "Player")
         {
             _collided = true;
         }
     }
     private void OnTriggerExit2D(Collider2D collision)
     {
-        if (collision.gameObject.layer == 11)
+        if (collision.tag == "Player")
         {
             _collided = false;
         }
