@@ -20,10 +20,12 @@ public class DialogueManager : MonoBehaviour
 
     [HideInInspector] public bool needAttack;
     private PrologueManager _prologueManager;
+    private BossTrigger _bossTrigger;
 
     private void Start()
     {
-        _prologueManager = GameObject.FindGameObjectWithTag("Prologue Manager").GetComponent<PrologueManager>();
+        _prologueManager = GameObject.FindGameObjectWithTag("Prologue Manager")?.GetComponent<PrologueManager>();
+        _bossTrigger = GameObject.FindGameObjectWithTag("Boss Trigger")?.GetComponent<BossTrigger>();
     }
 
     private void Update()
@@ -43,7 +45,11 @@ public class DialogueManager : MonoBehaviour
                 {
                     _idx = 0;
                     CloseWindow();
-                    if (needAttack) _prologueManager?.EnemyAttack();
+                    if (needAttack)
+                    { 
+                        _prologueManager?.EnemyAttack();
+                        _bossTrigger?.AngerBoss();
+                    }
                 }
             }
             else

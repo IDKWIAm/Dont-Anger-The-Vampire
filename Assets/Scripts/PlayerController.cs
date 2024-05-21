@@ -34,6 +34,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] GameObject batForm;
     [SerializeField] LayerMask groundLayer;
     [SerializeField] DialogueManager dialogueManager;
+    [SerializeField] AudioSource swingSound;
 
     private float _baseSpeed;
 
@@ -76,6 +77,7 @@ public class PlayerController : MonoBehaviour
 
     void Update()
     {
+        if (Time.timeScale == 0) return;
         TimerUpdate();
         MoveUpdate();
         DashUpdate();
@@ -238,6 +240,7 @@ public class PlayerController : MonoBehaviour
         {
             weapon.SetActive(true);
             Invoke("DisableWeapon", weaponShowTime);
+            swingSound.PlayOneShot(swingSound.clip);
         }
     }
 
@@ -360,6 +363,6 @@ public class PlayerController : MonoBehaviour
     public void DisableMovement()
     {
         _vampireFormAnimator.SetBool("IsRunning", false);
-        _playerRigitbody.velocity = new Vector2(0, _playerRigitbody.velocity.y);
+        _playerRigitbody.velocity = new Vector2(0, 0);
     }
 }

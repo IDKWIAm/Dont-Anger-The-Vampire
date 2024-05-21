@@ -6,6 +6,8 @@ public class BossTrigger : MonoBehaviour
     [SerializeField] GameObject bossWall; // Can be null
     [SerializeField] GameObject bossHealthbar;
     [SerializeField] AudioSource bossfightMusic;
+    [SerializeField] DialogueManager dialogueManager;
+    [SerializeField] PlayerController playerController;
 
     private AudioSource backgroundMusic;
 
@@ -16,11 +18,21 @@ public class BossTrigger : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.gameObject.layer != 11) return;
+        if (collision.TryGetComponent<PlayerController>(out PlayerController _playerController))
+        {
+            playerController.DisableMovement();
+            playerController.enabled = false;
+            dialogueManager.needAttack = true;
+        }
+    }
+
+    public void AngerBoss()
+    {
         bossHealthbar.SetActive(true);
         boss.GetComponent<Boss>().enabled = true;
         boss.GetComponent<BossHealth>().enabled = true;
         if (bossWall != null) bossWall.SetActive(true);
+        playerController.enabled = true;
         backgroundMusic?.Stop();
         bossfightMusic?.Play();
         Destroy(gameObject);

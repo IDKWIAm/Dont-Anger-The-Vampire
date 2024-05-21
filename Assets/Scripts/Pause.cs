@@ -3,10 +3,13 @@ using UnityEngine.SceneManagement;
 
 public class Pause : MonoBehaviour
 {
-    [SerializeField] private GameObject pauseMenu;
+    [SerializeField] GameObject pauseMenu;
+    [SerializeField] GameObject deathTexts;
 
     private void Update()
     {
+        if (deathTexts.activeSelf == true) return;
+
         if (Input.GetKeyDown(KeyCode.Escape))
         {
             Open();

@@ -2,9 +2,10 @@
 
 public class BossHealth : MonoBehaviour
 {
-    [SerializeField] private float health = 100f;
-    [SerializeField] private RectTransform bossHealthbar;
-    [SerializeField] private GameObject[] bossWalls;
+    [SerializeField] float health = 100f;
+    [SerializeField] RectTransform bossHealthbar;
+    [SerializeField] GameObject[] bossWalls;
+    [SerializeField] AudioSource bossFightMusic;
 
     private float _maxHealth;
 
@@ -26,6 +27,20 @@ public class BossHealth : MonoBehaviour
         health *= difficultyMultiplyer;
     }
 
+    private void Death()
+    {
+        bossHealthbar.transform.parent.gameObject.SetActive(false);
+        for (int i = 0; i < bossWalls.Length; i++)
+        {
+            bossWalls[i].SetActive(false);
+        }
+        _exit.canExit = true;
+
+        bossFightMusic.Stop();
+
+        Destroy(gameObject);
+    }
+
 
     public void DealDamage(float damage)
     {
@@ -33,14 +48,7 @@ public class BossHealth : MonoBehaviour
 
         if (health <= 0)
         {
-            bossHealthbar.transform.parent.gameObject.SetActive(false);
-            for (int i = 0; i < bossWalls.Length; i++)
-            {
-                bossWalls[i].SetActive(false);
-            }
-            _exit.canExit = true;
-
-            Destroy(gameObject);
+            Death();
         }
         bossHealthbar.anchorMax = new Vector2(health / _maxHealth, bossHealthbar.anchorMax.y);
     }

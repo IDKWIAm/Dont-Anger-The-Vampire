@@ -11,6 +11,7 @@ TagManager:
   - Enemy Counter
   - Prologue Manager
   - Background Music
+  - Boss Trigger
   layers:
   - Default
   - TransparentFX
