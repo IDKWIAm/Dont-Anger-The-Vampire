@@ -1106,7 +1106,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -850, y: 450}
+  m_AnchoredPosition: {x: -889.1, y: 460.2}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &7619165838531303006
@@ -3675,6 +3675,7 @@ MonoBehaviour:
   startMaxHealth: 4
   maxHealth: 12
   heartsInRow: 6
+  heartsGap: 1.5
   deathBG: {fileID: 2255842568123867334}
   deathText: {fileID: 940601498687687992}
   bossHealthBar: {fileID: 4204837669814511676}

@@ -15,7 +15,7 @@ public class FalseWall : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.gameObject.layer == 11 && !triggered)
+        if (collision.TryGetComponent<PlayerController>(out PlayerController playerController) && !triggered)
         {
             _animator.SetTrigger("Triggered");
 

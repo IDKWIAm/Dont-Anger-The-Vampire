@@ -1007,6 +1007,7 @@ GameObject:
   - component: {fileID: 8608665656289642692}
   - component: {fileID: 8608665656289642693}
   - component: {fileID: 8608665656289642694}
+  - component: {fileID: 2950815554881326864}
   m_Layer: 10
   m_Name: Boss
   m_TagString: Untagged
@@ -1106,6 +1107,7 @@ MonoBehaviour:
   health: 50
   bossHealthbar: {fileID: 0}
   bossWalls: []
+  bossFightMusic: {fileID: 0}
 --- !u!212 &8608665656289642692
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -1145,8 +1147,8 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 2
-  m_Sprite: {fileID: 21300000, guid: f4253ad685a11c047a157573b385a54c, type: 3}
-  m_Color: {r: 0.56874657, g: 0, b: 1, a: 1}
+  m_Sprite: {fileID: 21300000, guid: d35706813d2b4cf4e80b580dbf70c00d, type: 3}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -1169,18 +1171,18 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
+  m_Offset: {x: 0.09, y: 0}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 1, y: 1}
+    oldSize: {x: 2, y: 2}
     newSize: {x: 1, y: 1}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 1, y: 1}
+  m_Size: {x: 1, y: 2}
   m_EdgeRadius: 0
 --- !u!50 &8608665656289642694
 Rigidbody2D:
@@ -1203,6 +1205,25 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 4
+--- !u!95 &2950815554881326864
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8608665656289642688}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 2798ecd8696550d43b9ba8dd5002df4e, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &8747086650550012234
 GameObject:
   m_ObjectHideFlags: 0

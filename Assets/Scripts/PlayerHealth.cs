@@ -8,6 +8,7 @@ public class PlayerHealth : MonoBehaviour
     public int startMaxHealth = 5;
     [SerializeField] int maxHealth = 12;
     [SerializeField] int heartsInRow = 6;
+    [SerializeField] float heartsGap = 1;
 
     [SerializeField] GameObject deathBG;
     [SerializeField] GameObject deathText;
@@ -51,8 +52,8 @@ public class PlayerHealth : MonoBehaviour
     private void CreateHeart()
     {
         Image heart = Instantiate(heartPoint, parentCanvas);
-        if (startMaxHealth <= heartsInRow) heart.rectTransform.localPosition = new Vector2(heartsStartPos.localPosition.x + heartPoint.rectTransform.rect.width * 2 * drawedHeartsInRow, heartsStartPos.localPosition.y);
-        else heart.rectTransform.localPosition = new Vector2(heartsStartPos.localPosition.x + heartPoint.rectTransform.rect.width * 2 * drawedHeartsInRow, heartsStartPos.localPosition.y - heartPoint.rectTransform.rect.height * 2 * currentRow);
+        if (startMaxHealth <= heartsInRow) heart.rectTransform.localPosition = new Vector2(heartsStartPos.localPosition.x + heartPoint.rectTransform.rect.width * heartsGap * drawedHeartsInRow, heartsStartPos.localPosition.y);
+        else heart.rectTransform.localPosition = new Vector2(heartsStartPos.localPosition.x + heartPoint.rectTransform.rect.width * heartsGap * drawedHeartsInRow, heartsStartPos.localPosition.y - heartPoint.rectTransform.rect.height * heartsGap * currentRow);
         hearts.Add(heart.gameObject);
         drawedHeartsInRow += 1;
         if (drawedHeartsInRow == heartsInRow)

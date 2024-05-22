@@ -82,7 +82,10 @@ public class DialogueManager : MonoBehaviour
             {
                 messageText.text = message.Substring(0, i) + message[i];
 
-                if (i > 0 && message[i - 1] == '.') yield return new WaitForSeconds(letterAppearingDelay * 5);
+                if (i > 0)
+                {
+                    if (message[i - 1] == '.' || message[i - 1] == '!' || message[i - 1] == '?') yield return new WaitForSeconds(letterAppearingDelay * 5);
+                }
 
                 yield return new WaitForSeconds(letterAppearingDelay);
             }

@@ -8,6 +8,7 @@ public class Chest : MonoBehaviour
     [SerializeField] GameObject flyTip;
     [SerializeField] GameObject fallTip;
     [SerializeField] GameObject attackTip;
+    [SerializeField] GameObject dashTip;
 
     private bool _collided;
 
@@ -39,6 +40,7 @@ public class Chest : MonoBehaviour
                 if (flyTip != null) flyTip.SetActive(false);
                 if (fallTip != null) fallTip.SetActive(false);
                 if (attackTip != null) attackTip.SetActive(true);
+                if (dashTip != null) dashTip.SetActive(false);
                 _chestSprite.sprite = openedChestSprite;
             }
         }

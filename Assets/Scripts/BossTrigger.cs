@@ -31,6 +31,7 @@ public class BossTrigger : MonoBehaviour
         bossHealthbar.SetActive(true);
         boss.GetComponent<Boss>().enabled = true;
         boss.GetComponent<BossHealth>().enabled = true;
+        boss.GetComponent<Animator>().SetBool("Anger", true);
         if (bossWall != null) bossWall.SetActive(true);
         playerController.enabled = true;
         backgroundMusic?.Stop();
