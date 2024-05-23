@@ -11,6 +11,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] float maxFallingSpeed = 10f;
     [SerializeField] public bool weaponEnabled = true;
     [SerializeField] float weaponShowTime = 0.1f;
+    [SerializeField] float attackCooldown = 0.08f;
 
     [Header("Double Jump")]
     [SerializeField] bool doubleJumpEnabled;
@@ -53,10 +54,11 @@ public class PlayerController : MonoBehaviour
     private bool _dPressed;
     private bool _aPressed;
 
-    private float _timer;
+    private float _dashIntervalTimer;
     [HideInInspector] public float _KBCounter;
     private float _coyoteCounter;
     private float _flyingTimer;
+    private float _attackTimer;
 
     private float _defaultGravity;
 
@@ -101,14 +103,14 @@ public class PlayerController : MonoBehaviour
     {
         if (_aPressed || _dPressed)
         {
-            _timer -= Time.deltaTime;
-            if (_timer <= 0)
+            _dashIntervalTimer -= Time.deltaTime;
+            if (_dashIntervalTimer <= 0)
             {
                 _aPressed = false;
                 _dPressed = false;
             }
         }
-
+        if (_attackTimer > 0) _attackTimer -= Time.deltaTime;
         if (_coyoteCounter > 0) _coyoteCounter -= Time.deltaTime;
         if (_flyingTimer > 0) _flyingTimer -= Time.deltaTime;
     }
@@ -236,11 +238,12 @@ public class PlayerController : MonoBehaviour
         if (Time.timeScale == 0) return;
         if (weaponEnabled == false) return;
 
-        if (Input.GetMouseButtonDown(0))
+        if (Input.GetMouseButtonDown(0) && _attackTimer <= 0)
         {
             weapon.SetActive(true);
             Invoke("DisableWeapon", weaponShowTime);
             swingSound.PlayOneShot(swingSound.clip);
+            _attackTimer = attackCooldown;
         }
     }
 
@@ -302,7 +305,7 @@ public class PlayerController : MonoBehaviour
                 {
                     _aPressed = false;
                     _dashPerformed = true;
-                    _timer = 0;
+                    _dashIntervalTimer = 0;
                     _dashLeft = true;
                     dashEnabled = false;
                     Invoke("DisableDashLeft", dashTime);
@@ -310,7 +313,8 @@ public class PlayerController : MonoBehaviour
                 }
             }
             _aPressed = true;
-            _timer = pressingInterval;
+            _dPressed = false;
+            _dashIntervalTimer = pressingInterval;
         }
 
         if (Input.GetKeyDown(KeyCode.D))
@@ -321,7 +325,7 @@ public class PlayerController : MonoBehaviour
                 {
                     _dPressed = false;
                     _dashPerformed = true;
-                    _timer = 0;
+                    _dashIntervalTimer = 0;
                     _dashRight = true;
                     dashEnabled = false;
                     Invoke("DisableDashRight", dashTime);
@@ -329,7 +333,8 @@ public class PlayerController : MonoBehaviour
                 }
             }
             _dPressed = true;
-            _timer = pressingInterval;
+            _aPressed = false;
+            _dashIntervalTimer = pressingInterval;
         }
     }
 

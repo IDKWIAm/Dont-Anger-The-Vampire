@@ -34,6 +34,15 @@ public class EnemyHealth : MonoBehaviour
     {
         if (!summoned) _enemyCounter?.AddCount();
         PlayerPrefs.SetInt("collectorsPunishedOnLevel", PlayerPrefs.GetInt("collectorsPunishedOnLevel") + 1);
+        _animator.SetTrigger("Death");
+        GetComponent<EnemyAI>().enabled = false;
+        GetComponent<ContactDamage>().enabled = false;
+        GetComponent<BoxCollider2D>().enabled = false;
+        Invoke("destroy", 3);
+    }
+
+    public void destroy()
+    {
         Destroy(gameObject);
     }
 

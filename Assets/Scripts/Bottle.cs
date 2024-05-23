@@ -2,7 +2,7 @@
 
 public class Bottle : MonoBehaviour
 {
-    //private bool _collided;
+    private bool _collided;
 
     private PrologueManager _prologueManager;
 
@@ -13,27 +13,25 @@ public class Bottle : MonoBehaviour
 
     private void Update()
     {
-        //if (Input.GetKeyDown(KeyCode.E) && _collided)
-        //{
-        //    _prologueManager.EnableChest();
-        //}
+        if (Input.GetKeyDown(KeyCode.E) && _collided)
+        {
+            _prologueManager.EnableChest();
+        }
     }
 
-    private void OnTriggerStay2D(Collider2D collision)
+    private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.tag == "Player")
         {
-            if (Input.GetKeyDown(KeyCode.E))
-            {
-                _prologueManager.EnableChest();
-            }
+            _collided = true;
         }
     }
-    //private void OnTriggerExit2D(Collider2D collision)
-    //{
-    //    if (collision.tag == "Player")
-    //    {
-    //        _collided = false;
-    //    }
-    //}
+
+    private void OnTriggerExit2D(Collider2D collision)
+    {
+        if (collision.tag == "Player")
+        {
+            _collided = false;
+        }
+    }
 }

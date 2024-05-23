@@ -26,8 +26,11 @@ public class Boss : MonoBehaviour
     private int _attacksCounter;
     private float _stunTimer;
     private float _cooldownTimer;
+    private int secondAttacksStep = 1;
+    private int thirdAttacksStep = 1;
 
     private Rigidbody2D _rigitbody;
+    private Animator _animator;
 
     private Transform _player;
 
@@ -35,6 +38,7 @@ public class Boss : MonoBehaviour
     {
         _player = GameObject.FindGameObjectWithTag("Player").transform;
         _rigitbody = GetComponent<Rigidbody2D>();
+        _animator = GetComponent<Animator>();
 
         ApplyDifficulty();
         _cooldownTimer = attacksDelay;
@@ -46,6 +50,7 @@ public class Boss : MonoBehaviour
         else
         {
             _stunned = false;
+            _animator.SetBool("Stunned", false);
             _rigitbody.bodyType = RigidbodyType2D.Static;
         }
 
@@ -79,6 +84,7 @@ public class Boss : MonoBehaviour
         if (_attacksCounter >= stunRate && !_attackInProcess)
         {
             Stun();
+            _animator.SetBool("Stunned", true);
             _attacksCounter = 0;
         }
     }
@@ -95,7 +101,7 @@ public class Boss : MonoBehaviour
 
     IEnumerator SecondAttack()
     {
-        for (int i = 0; i < _secondAttackPositions.Length; i++)
+        for (int i = 0; i < _secondAttackPositions.Length; i += secondAttacksStep)
         {
             Instantiate(AspenStakeAttack, _secondAttackPositions[i].transform.position, Quaternion.identity);
             yield return new WaitForSeconds(spawnObjectsSACooldown);
@@ -105,8 +111,10 @@ public class Boss : MonoBehaviour
 
     IEnumerator ThirdAttack()
     {
-        for (int i = 0; i < _thirdAttackPositions.Length; i++)
+        for (int i = 0; i < _thirdAttackPositions.Length; i += thirdAttacksStep)
         {
+            if (i >= _thirdAttackPositions.Length) i = _thirdAttackPositions.Length - 1;
+
             var rotationZ = Random.Range(0, 360);
             Transform parent = _thirdAttackPositions[0].transform.parent;
             parent.rotation = Quaternion.Euler(parent.rotation.x, parent.rotation.y, rotationZ);
@@ -119,11 +127,28 @@ public class Boss : MonoBehaviour
     private void ApplyDifficulty()
     {
         float difficultyMultiplyer = PlayerPrefs.GetFloat("DifficultyMultiplyer");
-        if (difficultyMultiplyer == 0) difficultyMultiplyer = 1;
-        if (difficultyMultiplyer == 0.75f) difficultyMultiplyer = 1.25f;
-        if (difficultyMultiplyer == 1.25f) difficultyMultiplyer = 0.75f;
+
+        if (difficultyMultiplyer == 1)
+        {
+            difficultyMultiplyer = 1;
+            secondAttacksStep = 2;
+            thirdAttacksStep = 2;
+        }
+        else if (difficultyMultiplyer == 0.75f)
+        {
+            difficultyMultiplyer = 1.25f;
+            secondAttacksStep = 2;
+            thirdAttacksStep = 3;
+        }
+        else if (difficultyMultiplyer == 1.25f)
+        {
+            difficultyMultiplyer = 0.75f;
+            secondAttacksStep = 1;
+            thirdAttacksStep = 1;
+        }
 
         attacksDelay *= difficultyMultiplyer;
+        stunTime *= difficultyMultiplyer;
     }
 
     private void ChasePlayer()

@@ -8,12 +8,13 @@ public class BossHealth : MonoBehaviour
     [SerializeField] AudioSource bossFightMusic;
 
     private float _maxHealth;
-
+    private Rigidbody2D _rigidbody2D;
     private Exit _exit;
 
     private void Start()
     {
         _exit = GameObject.FindGameObjectWithTag("Exit").GetComponent<Exit>();
+        _rigidbody2D = GetComponent<Rigidbody2D>();
 
         ApplyDifficulty();
         _maxHealth = health;
@@ -35,12 +36,20 @@ public class BossHealth : MonoBehaviour
             bossWalls[i].SetActive(false);
         }
         _exit.canExit = true;
-
         bossFightMusic.Stop();
 
-        Destroy(gameObject);
+        _rigidbody2D.bodyType = RigidbodyType2D.Dynamic;
+        _rigidbody2D.velocity = new Vector2(0, 12);
+        GetComponent<Animator>()?.SetTrigger("Death");
+        GetComponent<Boss>().enabled = false;
+        GetComponent<BoxCollider2D>().enabled = false;
+        Invoke("destroy", 3);
     }
 
+    private void destroy()
+    {
+        Destroy(gameObject);
+    }
 
     public void DealDamage(float damage)
     {

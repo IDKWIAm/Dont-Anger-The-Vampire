@@ -1,17 +1,25 @@
 ﻿using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class MenuManager : MonoBehaviour
 {
-    [SerializeField] private float speed = 10;
+    [SerializeField] float speed = 10;
     [Space]
-    [SerializeField] private Transform mainMenu;
-    [SerializeField] private Transform settingsMenu;
-    [SerializeField] private Transform paintings;
-    [SerializeField] private Transform playDistancing;
-    [SerializeField] private GameObject fadeIn;
+    [SerializeField] Transform mainMenu;
+    [SerializeField] Transform settingsMenu;
+    [SerializeField] Transform paintings;
+    [SerializeField] Transform playDistancing;
+    [SerializeField] GameObject fadeIn;
+    [SerializeField] Slider slider;
 
     private Transform _target;
+
+    private void Awake()
+    {
+        if (!PlayerPrefs.HasKey("DifficultyMultiplyer")) PlayerPrefs.SetFloat("DifficultyMultiplyer", 1);
+        if (!PlayerPrefs.HasKey("Audio Volume")) PlayerPrefs.SetFloat("Audio Volume", 0.5f);
+    }
 
     private void Start()
     {
@@ -20,10 +28,13 @@ public class MenuManager : MonoBehaviour
         if (backgroundMusic != null) Destroy(backgroundMusic);
 
         float difficultyMultiplyer = PlayerPrefs.GetFloat("DifficultyMultiplyer");
+        float audioVolume = PlayerPrefs.GetFloat("Audio Volume");
         PlayerPrefs.DeleteAll();
         PlayerPrefs.SetFloat("DifficultyMultiplyer", difficultyMultiplyer);
+        PlayerPrefs.SetFloat("Audio Volume", audioVolume);
         _target = settingsMenu;
-        AudioListener.volume = 0.5f;
+        ChangeVolume(PlayerPrefs.GetFloat("Audio Volume"));
+        slider.value = PlayerPrefs.GetFloat("Audio Volume");
     }
 
     private void Update()
@@ -63,6 +74,7 @@ public class MenuManager : MonoBehaviour
     public void ChangeVolume(float volume)
     {
         AudioListener.volume = volume;
+        PlayerPrefs.SetFloat("Audio Volume", volume);
     }
 
     public void Exit()

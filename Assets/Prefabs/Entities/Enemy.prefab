@@ -52,11 +52,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ae5f54ed68e5b5b44a8216b58a167737, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 4.5
+  speed: 4.4
   jumpForce: 12
   jumpDistance: 4
   visionRange: 16
-  KBResistacnce: 35
+  KBResistacnce: 33
   groundChecker: {fileID: 1780019025743765053}
   groundLayer:
     serializedVersion: 2
@@ -78,7 +78,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: db56a78e56f9e384bb32723ca62bfee1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  health: 7
+  health: 4
+  summoned: 0
 --- !u!114 &8426754616199402455
 MonoBehaviour:
   m_ObjectHideFlags: 0
