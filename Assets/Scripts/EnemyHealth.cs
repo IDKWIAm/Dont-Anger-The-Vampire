@@ -3,6 +3,7 @@
 public class EnemyHealth : MonoBehaviour
 {
     [SerializeField] float health = 7f;
+    [SerializeField] AudioSource hurtSound;
 
     public bool summoned;
 
@@ -51,6 +52,8 @@ public class EnemyHealth : MonoBehaviour
         health -= damage;
 
         _animator.SetTrigger("Hit");
+
+        hurtSound.PlayOneShot(hurtSound.clip);
 
         if (health <= 0)
         {

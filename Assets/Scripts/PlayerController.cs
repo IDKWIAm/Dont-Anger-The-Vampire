@@ -234,7 +234,7 @@ public class PlayerController : MonoBehaviour
     private void AttackUpdate()
     {
         if (_isFlying) return;
-        if (dialogueManager.IsRunning()) return;
+        //if (dialogueManager.IsRunning()) return;
         if (Time.timeScale == 0) return;
         if (weaponEnabled == false) return;
 

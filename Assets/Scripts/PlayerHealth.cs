@@ -17,6 +17,8 @@ public class PlayerHealth : MonoBehaviour
     [SerializeField] Image heartPoint;
     [SerializeField] Transform parentCanvas;
     [SerializeField] RectTransform heartsStartPos;
+    [SerializeField] AudioSource bottlePickupSound;
+    [SerializeField] AudioSource hurtSound;
 
     private List<GameObject> hearts = new List<GameObject>();
 
@@ -98,6 +100,7 @@ public class PlayerHealth : MonoBehaviour
 
     public void HealthUp()
     {
+        bottlePickupSound.PlayOneShot(bottlePickupSound.clip);
         if (startMaxHealth < maxHealth)
         {
             startMaxHealth += 1;
@@ -108,6 +111,7 @@ public class PlayerHealth : MonoBehaviour
 
     public void Heal()
     {
+        bottlePickupSound.PlayOneShot(bottlePickupSound.clip);
         if (health == startMaxHealth) return;
 
         health += 1;
@@ -121,6 +125,8 @@ public class PlayerHealth : MonoBehaviour
         health -= damage;
         CheckHealth();
         _animator.SetTrigger("Hit");
+
+        hurtSound.PlayOneShot(hurtSound.clip);
 
         if (health <= 0)
         {

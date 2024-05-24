@@ -2,6 +2,8 @@
 
 public class Bottle : MonoBehaviour
 {
+    [SerializeField] AudioSource bottleSound;
+
     private bool _collided;
 
     private PrologueManager _prologueManager;
@@ -16,6 +18,7 @@ public class Bottle : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.E) && _collided)
         {
             _prologueManager.EnableChest();
+            bottleSound.PlayOneShot(bottleSound.clip);
         }
     }
 

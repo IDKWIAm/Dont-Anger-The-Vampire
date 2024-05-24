@@ -1,28 +1,44 @@
-﻿using UnityEngine;
+﻿using System.Collections.Generic;
+using UnityEngine;
 using UnityEngine.SceneManagement;
 
 public class Exit : MonoBehaviour
 {
     [SerializeField] GameObject fadeIn;
+    [SerializeField] DialogueManager dialogueManager;
+    [SerializeField] AudioSource doorOpeningClosingSound;
+
+    [SerializeField] float letterAppearingDelay = 0.05f;
+    [SerializeField] List<DialogueVariables> cantExitMessages;
 
     [HideInInspector] public bool canExit;
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.gameObject.TryGetComponent<PlayerHealth>(out PlayerHealth playerHealth) && canExit)
+        if (collision.gameObject.TryGetComponent<PlayerHealth>(out PlayerHealth playerHealth))
         {
-            PlayerPrefs.SetInt("Player health", playerHealth.health);
-            PlayerPrefs.SetInt("Player start max health", playerHealth.startMaxHealth);
+            if (canExit)
+            {
+                doorOpeningClosingSound.PlayOneShot(doorOpeningClosingSound.clip);
 
-            PlayerPrefs.SetInt("collectorsPunished", PlayerPrefs.GetInt("collectorsPunished") + PlayerPrefs.GetInt("collectorsPunishedOnLevel"));
-            PlayerPrefs.SetInt("secretsAmount", PlayerPrefs.GetInt("secretsAmount") + PlayerPrefs.GetInt("secretsAmountOnLevel"));
-            PlayerPrefs.SetInt("secretsFound", PlayerPrefs.GetInt("secretsFound") + PlayerPrefs.GetInt("secretsFoundOnLevel"));
+                PlayerPrefs.SetInt("Player health", playerHealth.health);
+                PlayerPrefs.SetInt("Player start max health", playerHealth.startMaxHealth);
 
-            PlayerPrefs.SetInt("collectorsPunishedOnLevel", 0);
-            PlayerPrefs.SetInt("secretsAmountOnLevel", 0);
-            PlayerPrefs.SetInt("secretsFoundOnLevel", 0);
+                PlayerPrefs.SetInt("collectorsPunished", PlayerPrefs.GetInt("collectorsPunished") + PlayerPrefs.GetInt("collectorsPunishedOnLevel"));
+                PlayerPrefs.SetInt("secretsAmount", PlayerPrefs.GetInt("secretsAmount") + PlayerPrefs.GetInt("secretsAmountOnLevel"));
+                PlayerPrefs.SetInt("secretsFound", PlayerPrefs.GetInt("secretsFound") + PlayerPrefs.GetInt("secretsFoundOnLevel"));
 
-            fadeIn.SetActive(true);
+                PlayerPrefs.SetInt("collectorsPunishedOnLevel", 0);
+                PlayerPrefs.SetInt("secretsAmountOnLevel", 0);
+                PlayerPrefs.SetInt("secretsFoundOnLevel", 0);
+
+                fadeIn.SetActive(true);
+            }
+            else
+            {
+                dialogueManager.OpenWindow();
+                dialogueManager.DisplayMessage(cantExitMessages, letterAppearingDelay);
+            }
         }
     }
 

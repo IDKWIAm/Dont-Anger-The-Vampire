@@ -1199,6 +1199,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   fadeIn: {fileID: 302241186}
+  dialogueManager: {fileID: 0}
+  letterAppearingDelay: 0.05
+  cantExitMessages: []
   canExit: 0
 --- !u!95 &302241189
 Animator:
@@ -2032,7 +2035,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Beta 4 ver.
+  m_text: Beta 5 ver.
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}

@@ -3,6 +3,7 @@
 public class Chest : MonoBehaviour
 {
     [SerializeField] Sprite openedChestSprite;
+    [SerializeField] AudioSource chestOpeningSound;
     [SerializeField] GameObject movementTip;
     [SerializeField] GameObject interactionTip;
     [SerializeField] GameObject flyTip;
@@ -42,6 +43,7 @@ public class Chest : MonoBehaviour
                 if (attackTip != null) attackTip.SetActive(true);
                 if (dashTip != null) dashTip.SetActive(false);
                 _chestSprite.sprite = openedChestSprite;
+                chestOpeningSound.PlayOneShot(chestOpeningSound.clip);
             }
         }
     }
