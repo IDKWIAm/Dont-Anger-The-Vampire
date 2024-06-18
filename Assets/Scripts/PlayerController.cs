@@ -30,6 +30,7 @@ public class PlayerController : MonoBehaviour
     [Space]
 
     [SerializeField] Transform groundChecker;
+    [SerializeField] Transform additionalGroundChecker;
     [SerializeField] GameObject weapon;
     [SerializeField] GameObject vampireForm;
     [SerializeField] GameObject batForm;
@@ -277,6 +278,10 @@ public class PlayerController : MonoBehaviour
             _doubleJumpPerformed = true;
             _flyAbilityPerformed = true;
             vampireForm.layer = 11;
+
+            if (additionalGroundChecker == null) return;
+            if (Physics2D.OverlapCircle(additionalGroundChecker.position, 0.1f, groundLayer)) 
+                transform.position += Vector3.up * (transform.localScale.y / 2);
         }
     }
 
@@ -310,6 +315,7 @@ public class PlayerController : MonoBehaviour
                     dashEnabled = false;
                     Invoke("DisableDashLeft", dashTime);
                     Invoke("ActivateDash", dashTime + dashCooldown);
+                    _vampireFormAnimator.SetTrigger("Dash");
                 }
             }
             _aPressed = true;
@@ -330,6 +336,7 @@ public class PlayerController : MonoBehaviour
                     dashEnabled = false;
                     Invoke("DisableDashRight", dashTime);
                     Invoke("ActivateDash", dashTime + dashCooldown);
+                    _vampireFormAnimator.SetTrigger("Dash");
                 }
             }
             _dPressed = true;

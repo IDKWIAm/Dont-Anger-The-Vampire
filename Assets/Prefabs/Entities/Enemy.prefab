@@ -53,7 +53,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ae5f54ed68e5b5b44a8216b58a167737, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 4.4
+  speed: 4.2
   jumpForce: 12
   jumpDistance: 4
   visionRange: 16
@@ -81,7 +81,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   health: 4
   hurtSound: {fileID: 4244617232401005245}
-  summoned: 0
+  summoned: 1
+  summonedSelfDestroy: 20
 --- !u!114 &8426754616199402455
 MonoBehaviour:
   m_ObjectHideFlags: 0

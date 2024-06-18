@@ -28,6 +28,7 @@ public class BossTrigger : MonoBehaviour
 
     public void AngerBoss()
     {
+        if (boss == null) return;
         bossHealthbar.SetActive(true);
         boss.GetComponent<Boss>().enabled = true;
         boss.GetComponent<BossHealth>().enabled = true;

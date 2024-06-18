@@ -6,6 +6,7 @@ public class EnemyHealth : MonoBehaviour
     [SerializeField] AudioSource hurtSound;
 
     public bool summoned;
+    public float summonedSelfDestroy = 15f;
 
     private EnemyCounter _enemyCounter;
     private Animator _animator;
@@ -20,7 +21,12 @@ public class EnemyHealth : MonoBehaviour
         }
         ApplyDifficulty();
 
-        if (summoned) health /= 2;
+        if (summoned)
+        {
+            health /= 2;
+            if (summonedSelfDestroy > 100) return;
+            Invoke("Death", summonedSelfDestroy);
+        }
     }
 
     private void ApplyDifficulty()

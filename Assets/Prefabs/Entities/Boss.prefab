@@ -1044,12 +1044,16 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   attacksDelay: 5
   speed: 4
-  bossPositionOffset: {x: 0, y: 6, z: 0}
+  bossPositionOffset: {x: 0, y: 5.5, z: 0}
   stunTime: 3
   stunRate: 3
   spawnObjectsFACooldown: 0
   spawnObjectsSACooldown: 0.2
   spawnObjectsTACooldown: 0.1
+  extraFATime: 2
+  extraSATime: 0.7
+  extraTATime: 0.3
+  ceiling: {fileID: 0}
   enemySummoner: {fileID: 660173480189104872, guid: 772f6a4edb3c4e7468f50d42d11a1253,
     type: 3}
   AspenStakeAttack: {fileID: 1048822559477160721, guid: 3e12ff589a69b884482e61f3c7c91d1a,

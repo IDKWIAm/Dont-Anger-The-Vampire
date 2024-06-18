@@ -2,6 +2,7 @@
 
 public class Chest : MonoBehaviour
 {
+    [SerializeField] VampireFlair vampireFlair;
     [SerializeField] Sprite openedChestSprite;
     [SerializeField] AudioSource chestOpeningSound;
     [SerializeField] GameObject movementTip;
@@ -44,6 +45,8 @@ public class Chest : MonoBehaviour
                 if (dashTip != null) dashTip.SetActive(false);
                 _chestSprite.sprite = openedChestSprite;
                 chestOpeningSound.PlayOneShot(chestOpeningSound.clip);
+                vampireFlair.DeleteObject(gameObject);
+                transform.GetChild(0).gameObject.SetActive(false);
             }
         }
     }

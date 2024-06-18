@@ -40,7 +40,8 @@ public class EnemyAI : MonoBehaviour
     {
         float difficultyMultiplyer = PlayerPrefs.GetFloat("DifficultyMultiplyer");
 
-        if (difficultyMultiplyer > 1) speed *= difficultyMultiplyer - 0.15f;
+        if (difficultyMultiplyer == 1.25f) speed *= difficultyMultiplyer - 0.15f;
+        if (difficultyMultiplyer == 0.75f) speed *= difficultyMultiplyer + 0.25f;
         else speed *= difficultyMultiplyer;
         KBResistacnce *= difficultyMultiplyer;
     }

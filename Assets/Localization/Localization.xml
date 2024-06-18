@@ -1,0 +1,525 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<Keys xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+	<Key Name="MainMenuTitle">
+		<Translates>
+			<en-us>Main menu</en-us>
+			<ru-ru>Главное меню</ru-ru>
+		</Translates>
+	</Key>
+	<Key Name="MainMenuButton1">
+		<Translates>
+			<en-us>Start Game</en-us>
+			<ru-ru>Начать игру</ru-ru>
+		</Translates>
+	</Key>
+	<Key Name="MainMenuButton2">
+		<Translates>
+			<en-us>Settings</en-us>
+			<ru-ru>Настройки</ru-ru>
+		</Translates>
+	</Key>
+	<Key Name="MainMenuButton3">
+		<Translates>
+			<en-us>Exit</en-us>
+			<ru-ru>Выйти</ru-ru>
+		</Translates>
+	</Key>
+	<Key Name="SettingsTitle">
+		<Translates>
+			<en-us>Settings</en-us>
+			<ru-ru>Настройки</ru-ru>
+		</Translates>
+	</Key>
+	<Key Name="SettingsSliderName">
+		<Translates>
+			<en-us>Volume</en-us>
+			<ru-ru>Звук</ru-ru>
+		</Translates>
+	</Key>
+	<Key Name="SettingsDropdownName">
+		<Translates>
+			<en-us>Language</en-us>
+			<ru-ru>Язык</ru-ru>
+		</Translates>
+	</Key>
+	<Key Name="SettingsButtonsTitle">
+		<Translates>
+			<en-us>Difficulty</en-us>
+			<ru-ru>Сложность</ru-ru>
+		</Translates>
+	</Key>
+	<Key Name="SettingsButton1">
+		<Translates>
+			<en-us>Easy</en-us>
+			<ru-ru>Легко</ru-ru>
+		</Translates>
+	</Key>
+	<Key Name="SettingsButton2">
+		<Translates>
+			<en-us>Normal</en-us>
+			<ru-ru>Нормально</ru-ru>
+		</Translates>
+	</Key>
+	<Key Name="SettingsButton3">
+		<Translates>
+			<en-us>Hard</en-us>
+			<ru-ru>Трудно</ru-ru>
+		</Translates>
+	</Key>
+	<Key Name="SettingsButton4">
+		<Translates>
+			<en-us>Back</en-us>
+			<ru-ru>Назад</ru-ru>
+		</Translates>
+	</Key>
+	<Key Name="MovementTip">
+		<Translates>
+			<en-us>AD to move
+Space - jump</en-us>
+			<ru-ru>AD для передвижения
+Space - прыжок</ru-ru>
+		</Translates>
+	</Key>
+	<Key Name="InteractionTip">
+		<Translates>
+			<en-us>MMB to highlight interactive objects
+
+E to interact</en-us>
+			<ru-ru>СКМ для подстветки интерактивных объектов
+
+E для взаимодействия</ru-ru>
+		</Translates>
+	</Key>
+	<Key Name="FlyTip">
+		<Translates>
+			<en-us>Hold shift to fly
+WS - change height</en-us>
+			<ru-ru>Зажмите shift для полета
+WS - менять высоту</ru-ru>
+		</Translates>
+	</Key>
+	<Key Name="FallTip">
+		<Translates>
+			<en-us>S to fall through one-way platform
+and increase falling speed</en-us>
+			<ru-ru>S чтобы слезть с односторонней платформы,
+а также ускорить свое падение</ru-ru>
+		</Translates>
+	</Key>
+	<Key Name="AttackTip">
+		<Translates>
+			<en-us>LMB to attack</en-us>
+			<ru-ru>ЛКМ для атаки</ru-ru>
+		</Translates>
+	</Key>
+	<Key Name="DashTip">
+		<Translates>
+			<en-us>Double press A or D to dash</en-us>
+			<ru-ru>Двойное нажание на A или D для рывка</ru-ru>
+		</Translates>
+	</Key>
+	<Key Name="TipText">
+		<Translates>
+			<en-us>RMB to continue</en-us>
+			<ru-ru>ПКМ чтобы продолжить</ru-ru>
+		</Translates>
+	</Key>
+	<Key Name="VampireName">
+		<Translates>
+			<en-us>Vampire</en-us>
+			<ru-ru>Вампир</ru-ru>
+		</Translates>
+	</Key>
+	<Key Name="CollectorName">
+		<Translates>
+			<en-us>Collector</en-us>
+			<ru-ru>Коллектор</ru-ru>
+		</Translates>
+	</Key>
+	<Key Name="CatName">
+		<Translates>
+			<en-us>Cat</en-us>
+			<ru-ru>Кот</ru-ru>
+		</Translates>
+	</Key>
+	<Key Name="PbCatName">
+		<Translates>
+			<en-us>Cat?</en-us>
+			<ru-ru>Кот?</ru-ru>
+		</Translates>
+	</Key>
+	<Key Name="OldLadyName">
+		<Translates>
+			<en-us>Old Lady</en-us>
+			<ru-ru>Бабуля</ru-ru>
+		</Translates>
+	</Key>
+	<Key Name="PbOldLadyName">
+		<Translates>
+			<en-us>Old Lady?</en-us>
+			<ru-ru>Бабуля?</ru-ru>
+		</Translates>
+	</Key>
+	<Key Name="VampireEnterMessage1">
+		<Translates>
+			<en-us>Oh, i finally finished with the bats in the basement.</en-us>
+			<ru-ru>Ох, наконец-то я закончил успокаивать летучих мышей в подвале.</ru-ru>
+		</Translates>
+	</Key>
+	<Key Name="VampireEnterMessage2">
+		<Translates>
+			<en-us>They've been going completely crazy, it's not a good sign.</en-us>
+			<ru-ru>Что-то последнее время они совсем обезумели, не к добру это все.</ru-ru>
+		</Translates>
+	</Key>
+	<Key Name="VampireEnterMessage3">
+		<Translates>
+			<en-us>But now I need to relax with a bottle of good bloody juice.</en-us>
+			<ru-ru>Но теперь мне нужно расслабится с помощью бутылки хорошего кровавого сока.</ru-ru>
+		</Translates>
+	</Key>
+	<Key Name="MonaLisaInspectMessage">
+		<Translates>
+			<en-us>I don't know what this painting is doing here, I should throw it out and hang my portrait instead.</en-us>
+			<ru-ru>Не знаю что тут делает эта картина, надо бы ее выбросить и повесить свой портрет.</ru-ru>
+		</Translates>
+	</Key>
+	<Key Name="QRCodeInspectMessage">
+		<Translates>
+			<en-us>I wonder where this qr code leads?..</en-us>
+			<ru-ru>Интересно, куда ведет это qr код?..</ru-ru>
+		</Translates>
+	</Key>
+	<Key Name="RedBottleInspectMessage1">
+		<Translates>
+			<en-us>Oh, love this taste.</en-us>
+			<ru-ru>Ох, как вкусно.</ru-ru>
+		</Translates>
+	</Key>
+	<Key Name="RedBottleInspectMessage2">
+		<Translates>
+			<en-us>*Knocks on the door*</en-us>
+			<ru-ru>*Стук в дверь*</ru-ru>
+		</Translates>
+	</Key>
+	<Key Name="RedBottleInspectMessage3">
+		<Translates>
+			<en-us>Open up!</en-us>
+			<ru-ru>Открывай!</ru-ru>
+		</Translates>
+	</Key>
+	<Key Name="RedBottleInspectMessage4">
+		<Translates>
+			<en-us>We know that you here!</en-us>
+			<ru-ru>Мы знаем что ты здесь!</ru-ru>
+		</Translates>
+	</Key>
+	<Key Name="RedBottleInspectMessage5">
+		<Translates>
+			<en-us>Open up or we'll break the door down!</en-us>
+			<ru-ru>Открывай, иначе мы выломаем дверь!</ru-ru>
+		</Translates>
+	</Key>
+	<Key Name="RedBottleInspectMessage6">
+		<Translates>
+			<en-us>Damn. But it had to happen sometime.</en-us>
+			<ru-ru>Вот черт. Но это должно было когда то случиться.</ru-ru>
+		</Translates>
+	</Key>
+	<Key Name="RedBottleInspectMessage7">
+		<Translates>
+			<en-us>I need to take my claws from the chest.</en-us>
+			<ru-ru>Нужно взять свои накладные когти в сундуке.</ru-ru>
+		</Translates>
+	</Key>
+	<Key Name="FloorElectricTorchInspectMessage1">
+		<Translates>
+			<en-us>Floor torch. Electric.</en-us>
+			<ru-ru>Напольный факел. Электрический.</ru-ru>
+		</Translates>
+	</Key>
+	<Key Name="FloorElectricTorchInspectMessage2">
+		<Translates>
+			<en-us>I don't need any extra hassle with the real one.</en-us>
+			<ru-ru>Не нужны мне лишние хлопоты с настоящим.</ru-ru>
+		</Translates>
+	</Key>
+	<Key Name="StrangeCatInspectMessage1">
+		<Translates>
+			<en-us>Strange cat.</en-us>
+			<ru-ru>Странный кот.</ru-ru>
+		</Translates>
+	</Key>
+	<Key Name="StrangeCatInspectMessage2">
+		<Translates>
+			<en-us>It seems like he's watching me.</en-us>
+			<ru-ru>Кажется он наблюдает за мной.</ru-ru>
+		</Translates>
+	</Key>
+	<Key Name="StrangeCatInspectMessage3">
+		<Translates>
+			<en-us>You yourself are strange, leather bag!</en-us>
+			<ru-ru>Сам ты странный, кожаный!</ru-ru>
+		</Translates>
+	</Key>
+	<Key Name="StrangeCatInspectMessage4">
+		<Translates>
+			<en-us>Are you a talking cat? Can you even read minds?</en-us>
+			<ru-ru>Ты говорящий кот? Еще и мысли читать умеешь?</ru-ru>
+		</Translates>
+	</Key>
+	<Key Name="StrangeCatInspectMessage5">
+		<Translates>
+			<en-us>Something wrong?</en-us>
+			<ru-ru>А что-то не так?</ru-ru>
+		</Translates>
+	</Key>
+	<Key Name="StrangeCatInspectMessage6">
+		<Translates>
+			<en-us>Uhhh... Cats don't usually talk…</en-us>
+			<ru-ru>Ээээ.... Коты обычно не разговаривают…</ru-ru>
+		</Translates>
+	</Key>
+	<Key Name="StrangeCatInspectMessage7">
+		<Translates>
+			<en-us>Maybe I'm not a cat.</en-us>
+			<ru-ru>А может я и не кот.</ru-ru>
+		</Translates>
+	</Key>
+	<Key Name="StrangeCatInspectMessage8">
+		<Translates>
+			<en-us>I better go...</en-us>
+			<ru-ru>Слушай, пожалуй я лучше пойду…</ru-ru>
+		</Translates>
+	</Key>
+	<Key Name="StrangeCatInspectMessage9">
+		<Translates>
+			<en-us>Wait a sec, I need to tell you that on each level (except the last one) there are secret rooms, try to find them all.</en-us>
+			<ru-ru>Погоди, мне тебе нужно сказать, что на каждом из уровней(кроме последнего) есть секретные комнаты, попробуй найти их все.</ru-ru>
+		</Translates>
+	</Key>
+	<Key Name="StrangeCatInspectMessage10">
+		<Translates>
+			<en-us>There is it here too, by the way.</en-us>
+			<ru-ru>Здесь тоже есть кстати.</ru-ru>
+		</Translates>
+	</Key>
+	<Key Name="StrangeCatInspectMessage11">
+		<Translates>
+			<en-us>Okay, thanks for the information.</en-us>
+			<ru-ru>Окей, спасибо за информацию.</ru-ru>
+		</Translates>
+	</Key>
+	<Key Name="StrangeCatInspectMessage12">
+		<Translates>
+			<en-us>And what are you doing?</en-us>
+			<ru-ru>А что ты делаешь?</ru-ru>
+		</Translates>
+	</Key>
+	<Key Name="StrangeCatInspectMessage13">
+		<Translates>
+			<en-us>Progra.... Well, it doesn't matter.</en-us>
+			<ru-ru>Программ.... Впрочем, не важно.</ru-ru>
+		</Translates>
+	</Key>
+	<Key Name="StrangeCatInspectMessage14">
+		<Translates>
+			<en-us>Programming? What exactly?</en-us>
+			<ru-ru>Программируешь? А что именно?</ru-ru>
+		</Translates>
+	</Key>
+	<Key Name="StrangeCatInspectMessage15">
+		<Translates>
+			<en-us>None of your business.</en-us>
+			<ru-ru>Не твое дело.</ru-ru>
+		</Translates>
+	</Key>
+	<Key Name="StrangeCatInspectMessage16">
+		<Translates>
+			<en-us>Please?..</en-us>
+			<ru-ru>Ну пожалуйста?..</ru-ru>
+		</Translates>
+	</Key>
+	<Key Name="StrangeCatInspectMessage17">
+		<Translates>
+			<en-us>if (playerMessage.Contains("Please")) answer = "No";</en-us>
+			<ru-ru>if (playerMessage.Contains("Пожалуйста")) answer = "Нет";</ru-ru>
+		</Translates>
+	</Key>
+	<Key Name="StrangeCatInspectMessage18">
+		<Translates>
+			<en-us>Whatever.</en-us>
+			<ru-ru>Ну и ладно.</ru-ru>
+		</Translates>
+	</Key>
+	<Key Name="ChestInspectMessage">
+		<Translates>
+			<en-us>Now i can open the door fearlessly!</en-us>
+			<ru-ru>Вот теперь можно бесстрашно открыть дверь!</ru-ru>
+		</Translates>
+	</Key>
+	<Key Name="CoffinInspectMessage1">
+		<Translates>
+			<en-us>I snatched this wonderful used coffin for next to nothing at one of the flea markets.</en-us>
+			<ru-ru>Урвал этот прекрасный б/у гроб за копейки на одной из барахолок.</ru-ru>
+		</Translates>
+	</Key>
+	<Key Name="CoffinInspectMessage2">
+		<Translates>
+			<en-us>The previous owner didn't even scratch it!</en-us>
+			<ru-ru>Предыдущий владелец его даже не поцарапал!</ru-ru>
+		</Translates>
+	</Key>
+	<Key Name="CollectorMessage1">
+		<Translates>
+			<en-us>Well, you asked for it!</en-us>
+			<ru-ru>Ну ты сам напросился!</ru-ru>
+		</Translates>
+	</Key>
+	<Key Name="CollectorMessage2">
+		<Translates>
+			<en-us>We'll beat your debts out of you!</en-us>
+			<ru-ru>Мы сами выбъем из тебя долги!</ru-ru>
+		</Translates>
+	</Key>
+	<Key Name="OneFamiliarGuyInspectMessage">
+		<Translates>
+			<en-us>I guess to have seen this man somewhere before…</en-us>
+			<ru-ru>Кажется я уже где-то видел этого человека…</ru-ru>
+		</Translates>
+	</Key>
+	<Key Name="BatmanInspectMessage1">
+		<Translates>
+			<en-us>I don’t remember this room, but it seems familiar. And this symbol...</en-us>
+			<ru-ru>Не помню эту комнату, но она кажется мне знакомой, этот символ…</ru-ru>
+		</Translates>
+	</Key>
+	<Key Name="BatmanInspectMessage2">
+		<Translates>
+			<en-us>But now there is no time to find out where this room came from.</en-us>
+			<ru-ru>Но сейчас нет времени на выяснение природы появления этой комнаты.</ru-ru>
+		</Translates>
+	</Key>
+	<Key Name="OldLadyMessage1">
+		<Translates>
+			<en-us>I guess this is the granny from whom I borrowed money for this castle…</en-us>
+			<ru-ru>Кажется это та бабуля, у которой я занял денег на этот замок…</ru-ru>
+		</Translates>
+	</Key>
+	<Key Name="OldLadyMessage2">
+		<Translates>
+			<en-us>It looks like she sent the collectors.</en-us>
+			<ru-ru>Похоже это она отправила коллекторов.</ru-ru>
+		</Translates>
+	</Key>
+	<Key Name="OldLadyMessage3">
+		<Translates>
+			<en-us>Well, honey, did you bring my money?</en-us>
+			<ru-ru>Ну что, милох, денех принес?</ru-ru>
+		</Translates>
+	</Key>
+	<Key Name="OldLadyMessage4">
+		<Translates>
+			<en-us>I'll bring it tomorrow, I promise!</en-us>
+			<ru-ru>Завтра принесу, обещаю!</ru-ru>
+		</Translates>
+	</Key>
+	<Key Name="OldLadyMessage5">
+		<Translates>
+			<en-us>I'll just buy myself some time to get out of here.</en-us>
+			<ru-ru>Как раз будет время смыться отсюда.</ru-ru>
+		</Translates>
+	</Key>
+	<Key Name="OldLadyMessage6">
+		<Translates>
+			<en-us>Ohhhh, do you even remember when you borrowed it from me?</en-us>
+			<ru-ru>Ты хоть помнишь когда ты уже у меня занял, а?</ru-ru>
+		</Translates>
+	</Key>
+	<Key Name="OldLadyMessage7">
+		<Translates>
+			<en-us>Yesterday?..</en-us>
+			<ru-ru>Вчера?..</ru-ru>
+		</Translates>
+	</Key>
+	<Key Name="OldLadyMessage8">
+		<Translates>
+			<en-us>5 months ago! Said that you'll return everything in a week!</en-us>
+			<ru-ru>5 месяцев назад! Сказал что уже через неделю все вернешь!</ru-ru>
+		</Translates>
+	</Key>
+	<Key Name="OldLadyMessage9">
+		<Translates>
+			<en-us>DO YOU KNOW WHAT HAPPENS TO THOSE WHO MAKE ME ANGRY? DO YOU WANT TO KNOW WHERE I GET SO MUCH MONEY?</en-us>
+			<ru-ru>ТЫ ЗНАЕШЬ ЧТО СЛУЧАЕТСЯ С ТЕМИ, КТО ЗЛИТ МЕНЯ? ХОЧЕШЬ УЗНАТЬ ОТКУДА У МЕНЯ СТОЛЬКО ДЕНЕГ?</ru-ru>
+		</Translates>
+	</Key>
+	<Key Name="OldLadyMessage10">
+		<Translates>
+			<en-us>Uhh…</en-us>
+			<ru-ru>Эээ....</ru-ru>
+		</Translates>
+	</Key>
+	<Key Name="OldLadyMessage11">
+		<Translates>
+			<en-us>NOW I'LL SHOW YOU!</en-us>
+			<ru-ru>ВОТ СЕЙЧАС И УЗНАЕШЬ!</ru-ru>
+		</Translates>
+	</Key>
+	<Key Name="WinnerInspectMessage1">
+		<Translates>
+			<en-us>It says here that this person beat all difficulties on the first try…</en-us>
+			<ru-ru>Тут написано, что этот человек прошел все режимы сложности с первой попытки…</ru-ru>
+		</Translates>
+	</Key>
+	<Key Name="WinnerInspectMessage2">
+		<Translates>
+			<en-us>But I think they are exaggerating.</en-us>
+			<ru-ru>Но я думаю они преувеличивают.</ru-ru>
+		</Translates>
+	</Key>
+	<Key Name="FinishTitle">
+		<Translates>
+			<en-us>You successfully defend the castle! 
+(And get rid of debts)</en-us>
+			<ru-ru>Вы успешно отбили замок! 
+(И избавились от долгов)</ru-ru>
+		</Translates>
+	</Key>
+	<Key Name="Result1">
+		<Translates>
+			<en-us>Debts payed:</en-us>
+			<ru-ru>Долгов выплачено:</ru-ru>
+		</Translates>
+	</Key>
+	<Key Name="Result2">
+		<Translates>
+			<en-us>Collectors punished:</en-us>
+			<ru-ru>Коллекторов наказано:</ru-ru>
+		</Translates>
+	</Key>
+	<Key Name="Result3">
+		<Translates>
+			<en-us>Secrets found:</en-us>
+			<ru-ru>Секретов найдено:</ru-ru>
+		</Translates>
+	</Key>
+	<Key Name="ReturnButton">
+		<Translates>
+			<en-us>Back to main menu</en-us>
+			<ru-ru>Вернуться в главное меню</ru-ru>
+		</Translates>
+	</Key>
+	<Key Name="PauseTitle">
+		<Translates>
+			<en-us>Pause</en-us>
+			<ru-ru>Пауза</ru-ru>
+		</Translates>
+	</Key>
+	<Key Name="ContinueButton">
+		<Translates>
+			<en-us>Continue</en-us>
+			<ru-ru>Продолжить</ru-ru>
+		</Translates>
+	</Key>
+</Keys>

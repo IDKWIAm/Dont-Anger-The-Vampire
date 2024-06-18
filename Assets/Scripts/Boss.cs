@@ -12,6 +12,11 @@ public class Boss : MonoBehaviour
     [SerializeField] float spawnObjectsFACooldown;
     [SerializeField] float spawnObjectsSACooldown;
     [SerializeField] float spawnObjectsTACooldown;
+    [SerializeField] float extraFATime = 1f;
+    [SerializeField] float extraSATime = 1f;
+    [SerializeField] float extraTATime = 0f;
+
+    [SerializeField] Transform ceiling;
 
     [SerializeField] GameObject enemySummoner;
     [SerializeField] GameObject AspenStakeAttack;
@@ -26,8 +31,9 @@ public class Boss : MonoBehaviour
     private int _attacksCounter;
     private float _stunTimer;
     private float _cooldownTimer;
-    private int secondAttacksStep = 1;
-    private int thirdAttacksStep = 1;
+    private int _secondAttacksStep = 1;
+    private int _thirdAttacksStep = 1;
+    private int _prevAttack = 0;
 
     private Rigidbody2D _rigitbody;
     private Animator _animator;
@@ -63,18 +69,27 @@ public class Boss : MonoBehaviour
         if (_cooldownTimer <= 0)
         {
             _attackInProcess = true;
-            var randomAttack = Random.Range(1, 4);
+            var randomAttack = 0;
+
+            if (_prevAttack == 1) randomAttack = Random.Range(2, 4);
+            else randomAttack = Random.Range(1, 4);
+
+            if (randomAttack < 1) randomAttack = 1;
+            if (randomAttack > 3) randomAttack = 3;
 
             if (randomAttack == 1)
             {
+                _prevAttack = 1;
                 StartFirstAttack();
             } 
             else if (randomAttack == 2)
             {
+                _prevAttack = 2;
                 StartSecondAttack();
             }
             else if (randomAttack == 3)
             {
+                _prevAttack = 3;
                 StartThirdAttack();
             }
             _cooldownTimer = attacksDelay;
@@ -96,22 +111,24 @@ public class Boss : MonoBehaviour
             Instantiate(enemySummoner, _firstAttackPositions[i].transform.position, Quaternion.identity);
             yield return new WaitForSeconds(spawnObjectsFACooldown);
         }
+        yield return new WaitForSeconds(extraFATime);
         _attackInProcess = false;
     }
 
     IEnumerator SecondAttack()
     {
-        for (int i = 0; i < _secondAttackPositions.Length; i += secondAttacksStep)
+        for (int i = 0; i < _secondAttackPositions.Length; i += _secondAttacksStep)
         {
             Instantiate(AspenStakeAttack, _secondAttackPositions[i].transform.position, Quaternion.identity);
             yield return new WaitForSeconds(spawnObjectsSACooldown);
         }
+        yield return new WaitForSeconds(extraSATime);
         _attackInProcess = false;
     }
 
     IEnumerator ThirdAttack()
     {
-        for (int i = 0; i < _thirdAttackPositions.Length; i += thirdAttacksStep)
+        for (int i = 0; i < _thirdAttackPositions.Length; i += _thirdAttacksStep)
         {
             if (i >= _thirdAttackPositions.Length) i = _thirdAttackPositions.Length - 1;
 
@@ -121,6 +138,7 @@ public class Boss : MonoBehaviour
             Instantiate(garlicAttack, _thirdAttackPositions[i].transform.position, parent.rotation);
             yield return new WaitForSeconds(spawnObjectsTACooldown);
         }
+        yield return new WaitForSeconds(extraTATime);
         _attackInProcess = false;
     }
 
@@ -128,23 +146,27 @@ public class Boss : MonoBehaviour
     {
         float difficultyMultiplyer = PlayerPrefs.GetFloat("DifficultyMultiplyer");
 
+        extraFATime *= difficultyMultiplyer;
+        extraSATime *= difficultyMultiplyer;
+        extraTATime *= difficultyMultiplyer;
+
         if (difficultyMultiplyer == 1)
         {
             difficultyMultiplyer = 1;
-            secondAttacksStep = 2;
-            thirdAttacksStep = 2;
+            _secondAttacksStep = 2;
+            _thirdAttacksStep = 2;
         }
         else if (difficultyMultiplyer == 0.75f)
         {
             difficultyMultiplyer = 1.25f;
-            secondAttacksStep = 2;
-            thirdAttacksStep = 3;
+            _secondAttacksStep = 2;
+            _thirdAttacksStep = 3;
         }
         else if (difficultyMultiplyer == 1.25f)
         {
             difficultyMultiplyer = 0.75f;
-            secondAttacksStep = 1;
-            thirdAttacksStep = 1;
+            _secondAttacksStep = 1;
+            _thirdAttacksStep = 1;
         }
 
         attacksDelay *= difficultyMultiplyer;
@@ -176,5 +198,8 @@ public class Boss : MonoBehaviour
         _rigitbody.bodyType = RigidbodyType2D.Dynamic;
         _stunned = true;
         _stunTimer = stunTime;
+        if (ceiling == null) return;
+        if (transform.position.y > ceiling.position.y) 
+            transform.position = new Vector3(transform.position.x, ceiling.position.y - (transform.localScale.y / 3), transform.position.z);
     }
 }
