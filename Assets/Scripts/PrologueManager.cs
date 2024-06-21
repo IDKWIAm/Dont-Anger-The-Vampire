@@ -6,6 +6,7 @@ public class PrologueManager : MonoBehaviour
     [SerializeField] GameObject chest;
     [SerializeField] GameObject bottle;
     [SerializeField] GameObject collector;
+    [SerializeField] GameObject messageSender;
     [SerializeField] DialogueManager dialogueManager;
 
     private BoxCollider2D _collider;
@@ -37,6 +38,7 @@ public class PrologueManager : MonoBehaviour
     {
         chest.GetComponent<BoxCollider2D>().enabled = true;
         vampireFlair.AddObject(chest);
+        messageSender.SetActive(false);
     }
 
     public void EnemyAttack()

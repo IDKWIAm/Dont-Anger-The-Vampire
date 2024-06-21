@@ -14,6 +14,7 @@ public class PlayerHealth : MonoBehaviour
     [SerializeField] GameObject deathText;
     [SerializeField] GameObject bossHealthBar;
     [SerializeField] SpriteRenderer vampireForm;
+    [SerializeField] SpriteRenderer batForm;
     [SerializeField] Image heartPoint;
     [SerializeField] Transform parentCanvas;
     [SerializeField] RectTransform heartsStartPos;
@@ -94,6 +95,8 @@ public class PlayerHealth : MonoBehaviour
             heart.SetActive(false);
         }
         vampireForm.sortingOrder = 11;
+        batForm.sortingOrder = 11;
+
 
         Time.timeScale = 0;
     }

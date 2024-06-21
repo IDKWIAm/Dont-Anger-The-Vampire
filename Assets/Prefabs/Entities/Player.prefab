@@ -872,7 +872,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3160075699822698784}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 7.115617, y: 2.81, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: -0.79999995, y: 0.79999995, z: 1}
   m_Children: []
   m_Father: {fileID: 9195161540905750242}
@@ -1970,6 +1970,7 @@ GameObject:
   - component: {fileID: 6852916366794085648}
   - component: {fileID: 2534152206066425013}
   - component: {fileID: 5607936793125300274}
+  - component: {fileID: 6207380013891644039}
   - component: {fileID: 7364342546814728128}
   m_Layer: 5
   m_Name: Death Tip
@@ -2094,6 +2095,19 @@ MonoBehaviour:
   m_hasFontAssetChanged: 1
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
+--- !u!114 &6207380013891644039
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5233102681937777618}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a1655cf203843ed488be0beb2281b6fe, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  key: DeadScreenDescription
 --- !u!95 &7364342546814728128
 Animator:
   serializedVersion: 3
@@ -2124,6 +2138,7 @@ GameObject:
   - component: {fileID: 2146159098541233138}
   - component: {fileID: 7128973735596240006}
   - component: {fileID: 3125490080977200241}
+  - component: {fileID: 4547586804479824612}
   - component: {fileID: 9203736144571817522}
   m_Layer: 5
   m_Name: Death Text
@@ -2247,6 +2262,19 @@ MonoBehaviour:
   m_hasFontAssetChanged: 1
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
+--- !u!114 &4547586804479824612
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5272849882958680252}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a1655cf203843ed488be0beb2281b6fe, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  key: DeadScreenTitle
 --- !u!95 &9203736144571817522
 Animator:
   serializedVersion: 3
@@ -3276,10 +3304,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   fadeIn: {fileID: 8293109519075199252}
-  dialogueManager: {fileID: 0}
   doorOpeningClosingSound: {fileID: 0}
-  letterAppearingDelay: 0.05
-  cantExitMessages: []
   canExit: 0
 --- !u!1 &8434567116084179864
 GameObject:
@@ -4047,6 +4072,7 @@ MonoBehaviour:
   deathText: {fileID: 940601498687687992}
   bossHealthBar: {fileID: 4204837669814511676}
   vampireForm: {fileID: 9195161542639313311}
+  batForm: {fileID: 9195161541961848163}
   heartPoint: {fileID: 206508153533568270, guid: 5eadbf4c502fec149a05ab3be2101257,
     type: 3}
   parentCanvas: {fileID: 3415296997106962986}

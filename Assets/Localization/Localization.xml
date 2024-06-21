@@ -72,6 +72,18 @@
 			<ru-ru>Назад</ru-ru>
 		</Translates>
 	</Key>
+	<Key Name="DeadScreenTitle">
+		<Translates>
+			<en-us>You've been evicted!</en-us>
+			<ru-ru>Вас выселили!</ru-ru>
+		</Translates>
+	</Key>
+	<Key Name="DeadScreenDescription">
+		<Translates>
+			<en-us>R to try again.</en-us>
+			<ru-ru>R чтобы попробовать еще раз.</ru-ru>
+		</Translates>
+	</Key>
 	<Key Name="MovementTip">
 		<Translates>
 			<en-us>AD to move
@@ -122,6 +134,12 @@ and increase falling speed</en-us>
 		<Translates>
 			<en-us>RMB to continue</en-us>
 			<ru-ru>ПКМ чтобы продолжить</ru-ru>
+		</Translates>
+	</Key>
+	<Key Name="UnavailableExit">
+		<Translates>
+			<en-us>I'm not done here yet.</en-us>
+			<ru-ru>Я еще не закончил здесь.</ru-ru>
 		</Translates>
 	</Key>
 	<Key Name="VampireName">

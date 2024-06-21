@@ -1,15 +1,10 @@
-﻿using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.SceneManagement;
 
 public class Exit : MonoBehaviour
 {
     [SerializeField] GameObject fadeIn;
-    [SerializeField] DialogueManager dialogueManager;
     [SerializeField] AudioSource doorOpeningClosingSound;
-
-    [SerializeField] float letterAppearingDelay = 0.05f;
-    [SerializeField] List<DialogueVariables> cantExitMessages;
 
     [HideInInspector] public bool canExit;
 
@@ -36,8 +31,7 @@ public class Exit : MonoBehaviour
             }
             else
             {
-                dialogueManager.OpenWindow();
-                dialogueManager.DisplayMessage(cantExitMessages, letterAppearingDelay);
+                GetComponent<MessageSender>()?.SendMessage();
             }
         }
     }

@@ -30810,6 +30810,7 @@ GameObject:
   - component: {fileID: 1546743329}
   - component: {fileID: 1546743330}
   - component: {fileID: 1546743331}
+  - component: {fileID: 1546743333}
   - component: {fileID: 1546743332}
   m_Layer: 0
   m_Name: Exit
@@ -30895,16 +30896,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   fadeIn: {fileID: 522383868}
-  dialogueManager: {fileID: 522383867}
   doorOpeningClosingSound: {fileID: 1047614601}
-  letterAppearingDelay: 0.05
-  cantExitMessages:
-  - speakerName: 
-    speakerNameKey: 
-    speakerColor: {r: 0, g: 0, b: 0, a: 0}
-    message: "\u042F \u0435\u0449\u0435 \u043D\u0435 \u0437\u0430\u043A\u043E\u043D\u0447\u0438\u043B
-      \u0437\u0434\u0435\u0441\u044C."
-    messageKey: 
   canExit: 0
 --- !u!61 &1546743332
 BoxCollider2D:
@@ -30932,6 +30924,29 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1, y: 1}
   m_EdgeRadius: 0
+--- !u!114 &1546743333
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1546743328}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cb71bcf853f4eca4999d82c90c7f7e37, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sendOnContact: 0
+  sendOnce: 0
+  letterAppearingDelay: 0.04
+  messages:
+  - speakerName: 
+    speakerNameKey: 
+    speakerColor: {r: 0, g: 0, b: 0, a: 0}
+    message: "\u042F \u0435\u0449\u0435 \u043D\u0435 \u0437\u0430\u043A\u043E\u043D\u0447\u0438\u043B
+      \u0437\u0434\u0435\u0441\u044C."
+    messageKey: UnavailableExit
+  dialogueManager: {fileID: 522383867}
 --- !u!1 &1574788669
 GameObject:
   m_ObjectHideFlags: 0
@@ -31651,6 +31666,7 @@ MonoBehaviour:
   chest: {fileID: 394764070}
   bottle: {fileID: 566755183}
   collector: {fileID: 1914655113}
+  messageSender: {fileID: 1818484771}
   dialogueManager: {fileID: 522383867}
 --- !u!4 &1655234700
 Transform:

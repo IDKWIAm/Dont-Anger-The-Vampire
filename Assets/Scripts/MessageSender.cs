@@ -51,17 +51,13 @@ public class MessageSender : MonoBehaviour
     {
         if (collision.tag == "Player")
         {
-            if (sendOnContact && sendOnce) _collider.enabled = false;
-            else
-            {
-                _collided = false;
-                //dialogueManager.CloseWindow();
-            }
+            _collided = false;
         }
     }
 
-    private void SendMessage()
+    public void SendMessage()
     {
+        if (dialogueManager.IsRunning()) return;
         dialogueManager.OpenWindow();
         dialogueManager.DisplayMessage(messages, letterAppearingDelay);
         if (sendOnce) _collider.enabled = false;
