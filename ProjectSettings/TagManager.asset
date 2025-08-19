@@ -12,6 +12,7 @@ TagManager:
   - Prologue Manager
   - Background Music
   - Boss Trigger
+  - Player Form
   layers:
   - Default
   - TransparentFX

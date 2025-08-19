@@ -58,6 +58,7 @@ MonoBehaviour:
   jumpDistance: 4
   visionRange: 16
   KBResistacnce: 33
+  turnDelayMax: 1.25
   groundChecker: {fileID: 1780019025743765053}
   groundLayer:
     serializedVersion: 2
@@ -67,6 +68,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 768
   abyssChecker: {fileID: 3765548558813829298}
+  animator: {fileID: 972818945344655}
 --- !u!114 &1780019024584775743
 MonoBehaviour:
   m_ObjectHideFlags: 0

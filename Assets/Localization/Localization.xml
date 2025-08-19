@@ -72,6 +72,12 @@
 			<ru-ru>Назад</ru-ru>
 		</Translates>
 	</Key>
+	<Key Name="SettingsButton5">
+		<Translates>
+			<en-us>Delete all data</en-us>
+			<ru-ru>Удалить все данные</ru-ru>
+		</Translates>
+	</Key>
 	<Key Name="DeadScreenTitle">
 		<Translates>
 			<en-us>You've been evicted!</en-us>
@@ -94,10 +100,10 @@ Space - прыжок</ru-ru>
 	</Key>
 	<Key Name="InteractionTip">
 		<Translates>
-			<en-us>MMB to highlight interactive objects
+			<en-us>Middle mouse button to highlight interactive objects
 
 E to interact</en-us>
-			<ru-ru>СКМ для подстветки интерактивных объектов
+			<ru-ru>Средняя кнопка мыши для подстветки интерактивных объектов
 
 E для взаимодействия</ru-ru>
 		</Translates>
@@ -120,26 +126,38 @@ and increase falling speed</en-us>
 	</Key>
 	<Key Name="AttackTip">
 		<Translates>
-			<en-us>LMB to attack</en-us>
-			<ru-ru>ЛКМ для атаки</ru-ru>
+			<en-us>Left mouse button to attack</en-us>
+			<ru-ru>Левая кнопка мыши для атаки</ru-ru>
 		</Translates>
 	</Key>
 	<Key Name="DashTip">
 		<Translates>
-			<en-us>Double press A or D to dash</en-us>
-			<ru-ru>Двойное нажание на A или D для рывка</ru-ru>
+			<en-us>Q to perform dash</en-us>
+			<ru-ru>Q чтобы совершить рывок</ru-ru>
 		</Translates>
 	</Key>
 	<Key Name="TipText">
 		<Translates>
-			<en-us>RMB to continue</en-us>
-			<ru-ru>ПКМ чтобы продолжить</ru-ru>
+			<en-us>Right mouse button or Enter to continue</en-us>
+			<ru-ru>Правая кнопка мыши или Enter чтобы продолжить</ru-ru>
 		</Translates>
 	</Key>
 	<Key Name="UnavailableExit">
 		<Translates>
 			<en-us>I'm not done here yet.</en-us>
 			<ru-ru>Я еще не закончил здесь.</ru-ru>
+		</Translates>
+	</Key>
+	<Key Name="UnavailableExitPrologue1">
+		<Translates>
+			<en-us>I won't go out anymore today.</en-us>
+			<ru-ru>Сегодня я больше не буду выходить.</ru-ru>
+		</Translates>
+	</Key>
+	<Key Name="UnavailableExitPrologue2">
+		<Translates>
+			<en-us>Well, unless debt collectors suddenly come... But that simply can't happen. Of course.</en-us>
+			<ru-ru>Ну только если внезапно не придут коллекторы… Но такого просто не может быть. Пфф.</ru-ru>
 		</Translates>
 	</Key>
 	<Key Name="VampireName">
@@ -400,6 +418,12 @@ and increase falling speed</en-us>
 			<ru-ru>Мы сами выбъем из тебя долги!</ru-ru>
 		</Translates>
 	</Key>
+	<Key Name="CollectorMessage3">
+		<Translates>
+			<en-us>Seems like it's time to defend myself…</en-us>
+			<ru-ru>Кажется пора защищаться…</ru-ru>
+		</Translates>
+	</Key>
 	<Key Name="OneFamiliarGuyInspectMessage">
 		<Translates>
 			<en-us>I guess to have seen this man somewhere before…</en-us>
@@ -492,8 +516,8 @@ and increase falling speed</en-us>
 	</Key>
 	<Key Name="WinnerInspectMessage2">
 		<Translates>
-			<en-us>But I think they are exaggerating.</en-us>
-			<ru-ru>Но я думаю они преувеличивают.</ru-ru>
+			<en-us>I think they are exaggerating.</en-us>
+			<ru-ru>Думаю они преувеличивают.</ru-ru>
 		</Translates>
 	</Key>
 	<Key Name="FinishTitle">
